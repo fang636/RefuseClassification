@@ -68,7 +68,6 @@ Page({
         }
 
       }, 1000)
-
     } else {
       wx.showToast({
         title: '请填写正确的手机号',
@@ -81,6 +80,7 @@ Page({
    * 点击确定的操作
    */
   startHander: function(e) {
+    var _this = this
     var phone = this.data.phone
     var verificationCode = this.data.verificationCode
     // if (phoneNumber == '') {
@@ -106,28 +106,28 @@ Page({
         data: {
           openId: app.globalData.openId,
           phone: phone
-
         },
         method: 'POST',
         success: function(result) {
-          if (result) {
+          if (result.statusCode == 200) {
             console.log('注册手机完成')
+            wx.switchTab({
+              url: '../index/index',
+            })
+            wx.showLoading({
+              title: 'loading',
+              icon: 'waiting'
+            })
+          } else {
+            wx.showModal({
+              title: '网络错误',
+              content: '请尝试重新连接',
+              showCancel: false
+            })
           }
         }
-
-      })
-
-
-      wx.switchTab({
-        url: '../index/index',
-      })
-      wx.showLoading({
-        title: 'loading',
-        icon: 'waiting'
       })
     }
-
-
   },
 
 

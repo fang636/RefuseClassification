@@ -44,7 +44,6 @@ App({
                       console.log('开始请求判断后台是否存在账号')
                       self.judgeUser()
                       console.log('请求结束')
-
                     }
                   })
                 } else {
@@ -68,7 +67,7 @@ App({
 
   },
   globalData: {
-    url: 'http://172.16.166.32/gsm/', //服务器地址
+    url: 'http://192.168.52.71/gsm/', //服务器地址
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
@@ -107,10 +106,21 @@ App({
               nickName: _this.globalData.userInfo.nickName
             },
             success: function(result) {
-              if (result) {
+
+              if (result.statusCode == 200) {
                 console.log('注册成功')
               } else {
-                console.log('注册失败')
+                wx.showModal({
+                  title: '网络错误',
+                  content: '请尝试重新连接',
+                  showCancel: false,
+                  confirmText: '重试',
+                  success: function(res) {
+                    if (res.confirm) {
+                      _this.judgeUser()
+                    }
+                  }
+                })
               }
             }
           })
@@ -127,8 +137,6 @@ App({
             url: '../index/index'
           })
         }
-
-
       },
       fail: function(result) {
         console.log('judgePhone方法发送请求失败！')
