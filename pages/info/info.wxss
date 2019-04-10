@@ -1,0 +1,39 @@
+/* pages/info/info.wxss */
+
+page {
+  width: 100%;
+}
+
+.myContainer {
+  margin: 0 20rpx;
+}
+
+.info {
+  border: 1rpx solid #eee;
+  background-color: #f8f8f8;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+
+.info .title {
+  display: flex;
+  font-size: 16px;
+  color: #6a6a6a;
+  margin-bottom: 20rpx;
+}
+
+.info .title .tit {
+  flex: 1;
+}
+
+.info .title .state {
+  width: 150rpx;
+}
+
+.info .content {
+  border-top: 5rpx #ccc dotted;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  padding-top: 20rpx;
+}

@@ -1,0 +1,25 @@
+<!--pages/register/register.wxml-->
+<view class='container'>
+  <view class='userinfo'>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+
+  <view class='info'>
+    <text>手机号</text>
+    <input type='number' placeholder='输入手机号' bindinput='pnChangeHander'></input>
+
+  </view>
+  <view class='info cleanbd'>
+    <text>验证码</text>
+    <input type='number' placeholder='输入验证码' bindinput='vftChangeHander'></input>
+    <button bindtap='getVerificationHander' disabled='{{btnState}}'>{{flag}}</button>
+  </view>
+
+  <button class='fall' type='primary' bindtap='startHander'>确认</button>
+  <button class='fall' type='primary' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用微信绑定的手机号</button>
+
+
+  <text class="explain">按业务所需，首次需要添加手机号码才能正常使用哦    下次可直接通过微信登录</text>
+
+</view>

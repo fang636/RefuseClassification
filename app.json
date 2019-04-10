@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/loading/loading",
+    "pages/index/index",
+    "pages/getUserinfo/getUserinfo",
+    "pages/register/register",
+    "pages/info/info",
+    "pages/my/my"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#eee",
+    "navigationBarTitleText": "垃圾服务",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "position": "bottom",
+    "backgroundColor": "#eee",
+    "color": "#707070",
+    "selectedColor": "#33d38b",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_active.png"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "text": "消息",
+        "iconPath": "images/info.png",
+        "selectedIconPath": "images/info_active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/i.png",
+        "selectedIconPath": "images/i_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

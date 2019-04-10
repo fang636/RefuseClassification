@@ -1,0 +1,41 @@
+<!--pages/info/info.wxml-->
+<view class='myContainer'>
+
+
+  <view class='info'>
+    <view class='title'>
+      <text class='tit'>订单号: 150145121</text>
+      <text class='state'>完成</text>
+    </view>
+    <view class='content'>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+    </view>
+  </view>
+
+ <view class='info'>
+    <view class='title'>
+      <text class='tit'>订单号: 150145121</text>
+      <text class='state'>完成</text>
+    </view>
+    <view class='content'>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+    </view>
+  </view>
+
+   <view class='info'>
+    <view class='title'>
+      <text class='tit'>订单号: 150145121</text>
+      <text class='state'>完成</text>
+    </view>
+    <view class='content'>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+      <text>测试 5545</text>
+    </view>
+  </view>
+
+</view>
