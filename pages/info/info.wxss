@@ -1,11 +1,9 @@
 /* pages/info/info.wxss */
 
-page {
-  width: 100%;
-}
-
 .myContainer {
+  border-top: 1rpx solid #e0e0e0;
   margin: 0 20rpx;
+  overflow: hidden;
 }
 
 .info {
@@ -13,6 +11,8 @@ page {
   background-color: #f8f8f8;
   padding: 20rpx;
   margin-bottom: 15rpx;
+  box-shadow: 0 0 5rpx #e0e0e0;
+
 }
 
 .info .title {

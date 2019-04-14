@@ -5,7 +5,8 @@
     "pages/getUserinfo/getUserinfo",
     "pages/register/register",
     "pages/info/info",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/QRcode/QRcode"
   ],
   "window": {
     "backgroundTextStyle": "light",

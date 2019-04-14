@@ -40,15 +40,17 @@ Page({
         key: 'scanCode'
       },
       {
-        image: '../../images/scanCode.png',
-        text: '备用',
+        image: '../../images/big.png',
+        text: '大件回收',
         key: '1'
       },
       {
-        image: '../../images/scanCode.png',
-        text: '备用2',
+        image: '../../images/recode3.png',
+        text: '记录',
         key: '2'
       }
+
+
 
     ]
   },
@@ -91,20 +93,22 @@ Page({
     }
   },
 
-  // getUserInfo: function(e) {
-  //   console.log(e)
-  //   app.globalData.userInfo = e.detail.userInfo
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //     hasUserInfo: true
-  //   })
-  // },
-  scanCodeHander: function(e) {
+  /**
+   * 工具栏事件处理
+   */
+  toolBarHander: function(e) {
     switch (e.currentTarget.dataset.key) {
       case 'scanCode':
-        wx.scanCode({
-          success: (res) => {
+        /* wx.scanCode({
+         success: (res) => {
             console.log(res)
+            var obj = null
+            try {
+              var obj = JSON.parse('{'+res.result+'}')
+            } catch (e) {
+              console.log(e)
+            }
+            console.log(obj)
             wx.showToast({
               title: '成功',
               icon: 'success',
@@ -119,6 +123,9 @@ Page({
             })
           },
           complete: (res) => {}
+        }) */
+        wx.navigateTo({
+          url: '../QRcode/QRcode?state=aaa'
         })
         break
     }

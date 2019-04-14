@@ -1,4 +1,11 @@
 /**index.wxss**/
+.myContainer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1rpx solid #e0e0e0;
+  margin: 0 20rpx;
+
+}
 
 .userinfo {
   display: flex;
@@ -27,32 +34,27 @@ swiper {
 }
 
 swiper-item image {
-  width: 100%;
+  width: 710rpx;
   display: inline-block;
   overflow: hidden;
   height: 100%;
   border-radius: 18rpx;
 }
 
-.myContainer {
-  margin-left: 25rpx;
-  margin-right: 25rpx;
-}
-
 .toolBar {
   display: flex;
-  margin: 20rpx 0;
+  margin: 20rpx 45rpx;
+  padding: 0;
 }
 
 .toolBar .item {
   flex: 1;
-  width: 33.3333%;
 }
 
 .toolBar .item image {
   margin: 0 auto;
-  width: 95rpx;
-  height: 95rpx;
+  width: 90rpx;
+  height: 90rpx;
   display: block;
 }
 

@@ -53,21 +53,17 @@ App({
                     success: function() {
                       console.log('执行了跳转???')
                     }
-
                   })
                 }
               }
             })
-
-
           }
         })
       }
     })
-
   },
   globalData: {
-    url: 'http://192.168.52.71/gsm/', //服务器地址
+    url: 'http://192.168.52.88/gsm/', //服务器地址
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
