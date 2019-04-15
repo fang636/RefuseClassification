@@ -1,0 +1,6 @@
+<view class='myContainer'>
+  <view class='info'>
+    <text>手机号</text>
+    <input type='number' placeholder='输入手机号' bindinput='pnChangeHander'></input>
+  </view>
+</view>

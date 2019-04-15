@@ -9,7 +9,7 @@
   </swiper>
 
   <view class='toolBar'>
-    <view class='item' bindtap='toolBarHander' wx:for='{{toolBar}}' data-key='{{item.key}}'>
+    <view class='item' bindtap='toolBarHander' wx:for='{{toolBar}}' data-key='{{item.key}}' wx:key='key'>
       <image src='{{item.image}}'></image>
       <text>{{item.text}}</text>
     </view>

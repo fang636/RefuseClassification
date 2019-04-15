@@ -6,7 +6,8 @@
     "pages/register/register",
     "pages/info/info",
     "pages/my/my",
-    "pages/QRcode/QRcode"
+    "pages/QRcode/QRcode",
+    "pages/bigThing/bigThing"
   ],
   "window": {
     "backgroundTextStyle": "light",

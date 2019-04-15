@@ -27,6 +27,7 @@ Page({
     hasUserInfo: false,
     test: '',
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    //轮播图
     images: [{
         url: '../../images/hb.jpg'
       },
@@ -34,20 +35,21 @@ Page({
         url: '../../images/hb.jpg'
       }
     ],
+    //工具栏
     toolBar: [{
         image: '../../images/scanCode.png',
         text: '取袋',
-        key: 'scanCode'
+        key: 'QRcode'
       },
       {
         image: '../../images/big.png',
         text: '大件回收',
-        key: '1'
+        key: 'bigThing'
       },
       {
-        image: '../../images/recode3.png',
+        image: '../../images/record3.png',
         text: '记录',
-        key: '2'
+        key: 'record'
       }
 
 
@@ -98,7 +100,7 @@ Page({
    */
   toolBarHander: function(e) {
     switch (e.currentTarget.dataset.key) {
-      case 'scanCode':
+      case 'QRcode':
         /* wx.scanCode({
          success: (res) => {
             console.log(res)
@@ -126,6 +128,16 @@ Page({
         }) */
         wx.navigateTo({
           url: '../QRcode/QRcode?state=aaa'
+        })
+        break
+      case 'bigThing':
+        wx.navigateTo({
+          url: '../bigThing/bigThing'
+        })
+        break
+        case 'record':
+        wx.switchTab({
+          url: '../info/info'
         })
         break
     }

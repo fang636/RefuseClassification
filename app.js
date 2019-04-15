@@ -129,6 +129,7 @@ App({
             url: '../register/register'
           })
         } else {
+          console.log('已存在完整账号信息---')
           wx.switchTab({
             url: '../index/index'
           })
@@ -136,11 +137,11 @@ App({
       },
       fail: function(result) {
         console.log('judgePhone方法发送请求失败！')
-        wx.redirectTo({
-          url: '../loading/loading'
-        })
+        // wx.redirectTo({
+        //   url: '../loading/loading'
+        // })
         wx.showModal({
-          title: '网络错误',
+          title: '连接错误',
           content: '请尝试重新连接',
           showCancel: false,
           confirmText: '重试',
