@@ -10,10 +10,10 @@
       <text>操作时间: {{item.date}}</text>
     </view>
   </view>
-  <view wx:if="{{info==[]}}">
-  查询出错，请稍后再试
+  <view class='tip' wx:if="{{info==[]}}">
+    查询出错，请稍后再试
   </view>
-  <view wx:if="{{info==null}}">
-  还没有数据哦
+  <view class='tip' wx:if="{{info==null}}">
+    还没有数据哦
   </view>
 </view>

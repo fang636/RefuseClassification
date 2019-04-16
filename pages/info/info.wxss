@@ -41,3 +41,9 @@
 .info .content text{
     padding-top: 10rpx;
 }
+
+.tip{
+  text-align: center;
+  font-size: 45rpx;
+  margin-top: 100rpx;
+}
