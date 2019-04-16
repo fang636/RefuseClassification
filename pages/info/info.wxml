@@ -1,74 +1,19 @@
 <!--pages/info/info.wxml-->
 <view class='myContainer'>
-
-
-  <view class='info'>
+  <view class='info' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]}}">
     <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
+      <text class='tit'>操作类型: {{item.cztype}}</text>
+      <text class='state'>{{item.status}}</text>
     </view>
     <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
+      <text wx:if="{{item.jqbh!=null}}">机器编号: {{item.jqbh}}</text>
+      <text>操作时间: {{item.date}}</text>
     </view>
   </view>
-
-  <view class='info'>
-    <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
-    </view>
-    <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-    </view>
+  <view wx:if="{{info==[]}}">
+  查询出错，请稍后再试
   </view>
-
-  <view class='info'>
-    <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
-    </view>
-    <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-    </view>
+  <view wx:if="{{info==null}}">
+  还没有数据哦
   </view>
-  <view class='info'>
-    <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
-    </view>
-    <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-    </view>
-  </view>
-  <view class='info'>
-    <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
-    </view>
-    <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-    </view>
-  </view>
-  <view class='info'>
-    <view class='title'>
-      <text class='tit'>订单号: 150145121</text>
-      <text class='state'>完成</text>
-    </view>
-    <view class='content'>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-      <text>测试 5545</text>
-    </view>
-  </view>
-
 </view>
