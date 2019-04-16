@@ -41,7 +41,8 @@ Page({
       data: {
         state: state,
         bh: '233',
-        openId: app.globalData.openId
+        openId: app.globalData.openId,
+        ljdbh:'aaaaaaaaa'
       }
     })
   },
