@@ -1,6 +1,20 @@
 <view class='myContainer'>
-  <view class='info'>
-    <text>手机号</text>
-    <input type='number' placeholder='输入手机号' bindinput='pnChangeHander'></input>
+  <view class='formbox'>
+    <view class='row_wrap'>
+      <view class='row_head'>联系手机</view>
+      <view class='row_body'>
+        <input type='number' placeholder='手机号' bindinput='pnChangeHander' value='{{phoneNumber}}'></input>
+      </view>
+    </view>
+
+    <view class='row_area_wrap'>
+      <view class='row_area_head'>物件说明</view>
+      <view class='row_area_body'>
+        <textarea type='text' placeholder='说明' bindinput='explainChangeHander'></textarea>
+      </view>
+    </view>
+
+<button type='primary' bindtap='submitHander'>提交申请</button>
+
   </view>
 </view>

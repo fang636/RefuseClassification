@@ -16,13 +16,57 @@
   padding-left: 20rpx;
   box-shadow: 0 0 5rpx #e0e0e0;
   border-radius: 10rpx;
+  margin: 0;
 }
 
 .info text {
   width: 150rpx;
-  font-size: 40rpx;
+  font-size: 34rpx;
 }
 
 .info input {
   flex: 1;
+  font-size: 34rpx;
 }
+
+.formbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 50rpx;
+}
+
+.row_wrap {
+  width: 90%;
+  display: flex;
+  border-bottom: 2rpx solid #e0e0e0;
+  padding: 20rpx 0;
+  margin: 0;
+  font-size: 36rpx;
+}
+
+.row_head {
+  margin-right: 20rpx;
+}
+
+.row_body {
+  flex: 1;
+}
+
+.row_area_wrap {
+  width: 90%;
+  border-bottom: 2rpx solid #e0e0e0;
+  padding: 20rpx 0;
+  margin: 0;
+  font-size: 36rpx;
+}
+
+.row_area_head {
+  display: block;
+}
+
+button{
+  margin-top: 50rpx;
+}
+
