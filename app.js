@@ -123,7 +123,7 @@ App({
         }
         //判断是否绑定手机
         _this.globalData.userModel = result.data
-        console.log(result.data)
+        // console.log(result.data)
         if (result.data.phone == null) { //跳转到绑定手机
           wx.redirectTo({
             url: '../register/register'

@@ -135,11 +135,40 @@ Page({
           url: '../bigThing/bigThing'
         })
         break
-        case 'record':
+      case 'record':
         wx.switchTab({
           url: '../info/info'
         })
         break
+      case 'bigThingManger':
+        wx.switchTab({
+          url: '../info/info'
+        })
+        break
+      case 'violation':
+
+        break
+    }
+  },
+  //环卫工人登录时切换工具栏
+  onShow: function() {
+    const _this = this
+    var userModel = app.globalData.userModel
+    console.log(userModel)
+    if (userModel.sf == 'ROLE_HWGR') {
+      _this.setData({
+        toolBar: [{
+            image: '../../images/manger.png',
+            text: '大物件',
+            key: 'bigThingManger'
+          },
+          {
+            image: '../../images/edit.png',
+            text: '违规反馈',
+            key: 'violation'
+          }
+        ]
+      })
     }
   }
 })
