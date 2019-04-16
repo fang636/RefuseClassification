@@ -170,5 +170,23 @@ Page({
         ]
       })
     }
+  },
+  getFormId: function(res) {
+    var formId = res.detail.formId
+    wx.request({
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      method: 'POST',
+      url: app.globalData.url + 'saveFormId',
+      dtaa: {
+        openId: app.globalData.openId,
+        formId: formId
+      },
+      success: function(result) {
+        
+      }
+    })
+
   }
 })

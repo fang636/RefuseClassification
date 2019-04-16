@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 page {
   width: 100%;
   background-color: #eee;
@@ -12,4 +13,16 @@ page {
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
+
+button.btnUtil {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+
+}
+
+button.btnUtil:after {
+  border: none;
+}

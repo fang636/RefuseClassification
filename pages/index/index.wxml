@@ -10,8 +10,14 @@
 
   <view class='toolBar'>
     <view class='item' bindtap='toolBarHander' wx:for='{{toolBar}}' data-key='{{item.key}}' wx:key='key'>
-      <image src='{{item.image}}'></image>
-      <text>{{item.text}}</text>
+      <form bindsubmit="getFormId" report-submit='true'>
+        <button form-type="submit" class='btnUtil'>
+          <image src='{{item.image}}'></image>
+          <text>{{item.text}}</text>
+        </button>
+      </form>
+
     </view>
   </view>
+
 </view>
