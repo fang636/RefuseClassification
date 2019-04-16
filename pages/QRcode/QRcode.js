@@ -31,6 +31,19 @@ Page({
     this.setData({
       qrcodeURL: imgData
     })
+
+    wx.request({
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      url: app.globalData.url + 'fd/weixin/qrfd',
+      method: 'POST',
+      data: {
+        state: state,
+        bh: '233',
+        openId: app.globalData.openId
+      }
+    })
   },
 
   /**

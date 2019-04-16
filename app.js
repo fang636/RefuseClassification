@@ -63,7 +63,7 @@ App({
     })
   },
   globalData: {
-    url: 'http://192.168.52.88/gsm/', //服务器地址
+    url: 'http://192.168.52.59/gsm/', //服务器地址
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
@@ -102,7 +102,6 @@ App({
               nickName: _this.globalData.userInfo.nickName
             },
             success: function(result) {
-
               if (result.statusCode == 200) {
                 console.log('注册成功')
               } else {

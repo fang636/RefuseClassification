@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.4",
+	"libVersion": "2.6.5",
 	"appid": "wx25f3f3a84e45348d",
 	"projectname": "RefuseManage",
 	"debugOptions": {
