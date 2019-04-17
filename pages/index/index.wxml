@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class='myContainer'>
+
   <swiper class='mySwiper' indicator-dots='true'>
     <block wx:for='{{images}}'>
       <swiper-item>
@@ -16,7 +17,6 @@
           <text>{{item.text}}</text>
         </button>
       </form>
-
     </view>
   </view>
 

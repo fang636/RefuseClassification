@@ -7,9 +7,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    state: 'plain',
     info: []
   },
-
+/**
+ * 点击卡片事件(进入详情)
+ */
+  getDetailHander: function(e) {
+    var id=e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../detail/detail?id='+id
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -29,32 +38,33 @@ Page({
    */
   onShow: function() {
     const _this = this
-    wx.request({
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-      method: 'POST',
-      url: app.globalData.url + 'user/weixin/getAll',
-      data: {
-        openId: app.globalData.openId
-      },
-      success: function(result) {
-        //console.log(result)
-        var res_info
-        if (result.statusCode == 200) {
-          if (result.data.length > 0) {
-            res_info = result.data
-          } else {
-            res_info = null
-          }
+    var url = app.globalData.url + 'user/weixin/getAll'
+    var data = {
+      openId: app.globalData.openId
+    }
+    var success = function(result) {
+      console.log(result)
+      var res_info
+      if (result.statusCode == 200) {
+        if (result.data.length > 0) {
+          res_info = result.data
         } else {
-          res_info = []
+          res_info = null
         }
-        _this.setData({
-          info: res_info
-        })
+      } else {
+        res_info = []
       }
-    })
+      _this.setData({
+        info: res_info
+      })
+    }
+    if (app.globalData.userModel.sf == 'ROLE_HWGR') {
+      url = app.globalData.url + 'weixin/czdjlj'
+      this.setData({
+        state: 'hwg'
+      })
+    }
+    app.myRequest(url, data, null, success)
 
   },
 

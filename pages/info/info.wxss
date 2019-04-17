@@ -15,6 +15,9 @@
   height: 150rpx;
 
 }
+.big {
+  height: 210rpx;
+}
 
 .info .title {
   display: flex;

@@ -51,12 +51,12 @@ Page({
         text: '记录',
         key: 'record'
       }
-
-
-
     ]
   },
+
+
   onLoad: function(options) {
+    this.onShow()
     wx.hideLoading()
     if (app.globalData.userInfo) {
       this.setData({
@@ -152,11 +152,11 @@ Page({
   },
   //环卫工人登录时切换工具栏
   onShow: function() {
-    const _this = this
     var userModel = app.globalData.userModel
-    console.log(userModel)
+    //console.log(userModel)
     if (userModel.sf == 'ROLE_HWGR') {
-      _this.setData({
+      console.log('环卫工人登录===')
+      this.setData({
         toolBar: [{
             image: '../../images/manger.png',
             text: '大物件',
@@ -170,23 +170,25 @@ Page({
         ]
       })
     }
+
   },
   getFormId: function(res) {
     var formId = res.detail.formId
-    wx.request({
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-      method: 'POST',
-      url: app.globalData.url + 'saveFormId',
-      dtaa: {
-        openId: app.globalData.openId,
-        formId: formId
-      },
-      success: function(result) {
-        
-      }
+    // if (formId == 'the formId is a mock one') {
+    //   console.log(`模拟器中运行！`)
+    //   return false;
+    // }
+    // if (formId.length == 0) {
+    //   console.log(`formId不能为空`)
+    //   return false;
+    // }
+    var url = app.globalData.url + 'user/weixin/saveFormId'
+    var data = {
+      openId: app.globalData.openId,
+      formId: formId
+    }
+    app.myRequest(url, data, null, function(result) {
+      console.log('保存formId')
     })
-
   }
 })

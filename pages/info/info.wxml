@@ -1,6 +1,7 @@
 <!--pages/info/info.wxml-->
 <view class='myContainer'>
-  <view class='info' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]}}">
+
+  <view class='info' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='plain'}}">
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
       <text class='state'>{{item.status}}</text>
@@ -10,9 +11,23 @@
       <text>操作时间: {{item.date}}</text>
     </view>
   </view>
+
+  <view class='info big' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='hwg'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
+    <view class='title'>
+      <text class='tit'>操作类型: 大物件</text>
+      <text class='state'>{{item.status}}</text>
+    </view>
+    <view class='content'>
+      <text>地点: {{item.address.name}}</text>
+      <text>电话: {{item.phone}}</text>
+      <text>时间: {{item.sqdate}}</text>
+    </view>
+  </view>
+
   <view class='tip' wx:if="{{info==[]}}">
     查询出错，请稍后再试
   </view>
+
   <view class='tip' wx:if="{{info==null}}">
     还没有数据哦
   </view>

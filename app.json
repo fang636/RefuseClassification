@@ -7,7 +7,8 @@
     "pages/info/info",
     "pages/my/my",
     "pages/QRcode/QRcode",
-    "pages/bigThing/bigThing"
+    "pages/bigThing/bigThing",
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,7 +31,7 @@
       },
       {
         "pagePath": "pages/info/info",
-        "text": "消息",
+        "text": "记录",
         "iconPath": "images/info.png",
         "selectedIconPath": "images/info_active.png"
       },

@@ -153,5 +153,26 @@ App({
         })
       }
     })
+  },
+  myRequest: function(url, data, type, success) {
+    if (type == '' || type == null) {
+      type = 'JSON'
+    }
+    // console.log('url:' + url)
+    // console.log('data:')
+    // console.log(data)
+    // console.log('type:')
+    // console.log(type)
+    // console.log('tsuccess:')
+    // console.log(success)
+    wx.request({
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      url: url,
+      data: data,
+      type: type,
+      success: success
+    })
   }
 })

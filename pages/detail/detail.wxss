@@ -1,0 +1,28 @@
+.myContainer {
+  border-top: 1rpx solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 30rpx;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.textBox_warp {
+  display: flex;
+  border-bottom: 2rpx solid #e0e0e0;
+  padding: 20rpx 0;
+}
+
+.warp_head {
+  font-size: 30rpx;
+}
+
+.warp_body {
+  font-size: 36rpx;
+  font-weight: 600rpx;
+}

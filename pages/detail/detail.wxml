@@ -1,0 +1,9 @@
+<view class='myContainer'>
+  <view class='textBox'>
+    <view class='textBox_warp'>
+      <view class='warp_head'>说明</view>
+      <view class='warp_body'>====内容=====</view>
+    </view>
+
+  </view>
+</view>
