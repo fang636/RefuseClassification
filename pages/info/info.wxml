@@ -4,7 +4,7 @@
   <view class='info' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='plain'}}">
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
-      <text class='state'>{{item.status}}</text>
+      <text class='state {{item.status=="申请中" ? "greenText": ""}}'>{{item.status}}</text>
     </view>
     <view class='content'>
       <text wx:if="{{item.jqbh!=null}}">机器编号: {{item.jqbh}}</text>
@@ -14,13 +14,13 @@
 
   <view class='info big' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='hwg'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
     <view class='title'>
-      <text class='tit'>操作类型: 大物件</text>
-      <text class='state'>{{item.status}}</text>
+      <text class='tit'>操作类型: {{cztype}}</text>
+      <text class='state {{item.status=="申请中"?"greenText":""}}'>{{item.status}}</text>
     </view>
     <view class='content'>
-      <text>地点: {{item.address.name}}</text>
-      <text>电话: {{item.phone}}</text>
-      <text>时间: {{item.sqdate}}</text>
+      <text>地点: {{item.user.parentName}}</text>
+      <text>电话: {{item.sqphone}}</text>
+      <text>时间: {{item.date}}</text>
     </view>
   </view>
 

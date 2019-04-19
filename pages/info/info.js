@@ -10,13 +10,13 @@ Page({
     state: 'plain',
     info: []
   },
-/**
- * 点击卡片事件(进入详情)
- */
+  /**
+   * 点击卡片事件(进入详情)
+   */
   getDetailHander: function(e) {
-    var id=e.currentTarget.dataset.id
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../detail/detail?id='+id
+      url: '../detail/detail?id=' + id
     })
   },
   /**
@@ -38,12 +38,18 @@ Page({
    */
   onShow: function() {
     const _this = this
-    var url = app.globalData.url + 'user/weixin/getAll'
-    var data = {
-      openId: app.globalData.openId
+    var url = app.globalData.url + 'weixin/getAll'
+
+    if (app.globalData.userModel.sf == 'ROLE_HWGR') {
+      url = app.globalData.url + 'weixin/czdjlj'
+      this.setData({
+        state: 'hwg'
+      })
     }
-    var success = function(result) {
-      console.log(result)
+    app.myRequest(url, {
+      openId: app.globalData.openId
+    }, null, function(result) {
+      //console.log(result)
       var res_info
       if (result.statusCode == 200) {
         if (result.data.length > 0) {
@@ -52,19 +58,12 @@ Page({
           res_info = null
         }
       } else {
-        res_info = []
+        res_info = {}
       }
       _this.setData({
         info: res_info
       })
-    }
-    if (app.globalData.userModel.sf == 'ROLE_HWGR') {
-      url = app.globalData.url + 'weixin/czdjlj'
-      this.setData({
-        state: 'hwg'
-      })
-    }
-    app.myRequest(url, data, null, success)
+    })
 
   },
 

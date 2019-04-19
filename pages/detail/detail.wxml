@@ -1,9 +1,23 @@
 <view class='myContainer'>
   <view class='textBox'>
     <view class='textBox_warp'>
-      <view class='warp_head'>说明</view>
-      <view class='warp_body'>====内容=====</view>
+      <view class='warp_head'>地址</view>
+      <view class='warp_body'>{{info.user.parentName}}</view>
     </view>
-
+    <view class='textBox_warp'>
+      <view class='warp_head'>联系电话</view>
+      <view class='warp_body'>{{info.sqphone}}</view>
+    </view>
+    <view class='textBox_warp'>
+      <view class='warp_head'>时间</view>
+      <view class='warp_body'>{{info.date}}</view>
+    </view>
+    <view class='textBox_warp_big'>
+      <view class='warp_head'>说明</view>
+      <view class='warp_body'>{{info.djlj}}</view>
+    </view>
   </view>
+
+  <button type='primary' class='fillBtn' bindtap='startHander' disabled='{{startBtnState}}'>{{startBtnText}}</button>
+  <button class='fillBtn' bindtap='callHander'>联系该用户</button>
 </view>

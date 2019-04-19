@@ -1,4 +1,6 @@
 //app.js
+
+
 App({
   onLaunch: function() {
     var self = this;
@@ -7,22 +9,30 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
+
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('获取到code=' + res.code)
         wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session',
-          data: {
-            appid: 'wx25f3f3a84e45348d',
-            secret: 'baca523e58ca5c4e58210c4187b418eb',
-            js_code: res.code,
-            grant_type: 'authorizattion_code'
+          method: 'get',
+          header: {
+            "Content-Type": "applciation/json"
           },
-          method: 'GET',
+          url: this.globalData.url + 'weixin/decodeOpenId',
+          data: {
+            code: res.code
+          },
           success: function(result) {
-            self.globalData.openId = result.data.openid
+            if (result.data.status == 0) {
+              wx.showModal({
+                title: '获取用户凭证失败',
+                content: '服务器可能出问题了--请退出稍后重试'
+              })
+              return
+            }
+            self.globalData.openId = result.data.openId
             console.log('获取到openid===' + self.globalData.openId)
             // 获取用户信息
             wx.getSetting({
@@ -59,11 +69,26 @@ App({
             })
           }
         })
+        // wx.request({
+        //   url: 'https://api.weixin.qq.com/sns/jscode2session',
+        //   data: {
+        //     appid: 'wx25f3f3a84e45348d',
+        //     secret: 'baca523e58ca5c4e58210c4187b418eb',
+        //     js_code: res.code,
+        //     grant_type: 'authorizattion_code'
+        //   },
+        //   method: 'GET',
+        //   success: function(result) {
+
+        //   }
+        // })
       }
     })
   },
   globalData: {
     url: 'http://192.168.52.59/gsm/', //服务器地址
+    //url: 'http://localhost/gsm/', //服务器地址
+    //url: 'http://www.51baiyao.com:8085/gsm/',
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
@@ -81,7 +106,7 @@ App({
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
-      url: _this.globalData.url + 'user/weixin/findOpenId',
+      url: _this.globalData.url + 'weixin/findOpenId',
       data: {
         openId: _this.globalData.openId
       },
@@ -96,7 +121,7 @@ App({
               'content-type': 'application/x-www-form-urlencoded',
             },
             method: 'POST',
-            url: _this.globalData.url + 'user/weixin/zhuce',
+            url: _this.globalData.url + 'weixin/zhuce',
             data: {
               openId: _this.globalData.openId,
               nickName: _this.globalData.userInfo.nickName

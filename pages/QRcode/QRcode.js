@@ -36,7 +36,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded',
       },
-      url: app.globalData.url + 'fd/weixin/qrfd',
+      url: app.globalData.url + 'weixin/qrfd',
       method: 'POST',
       data: {
         state: state,

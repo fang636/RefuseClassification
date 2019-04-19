@@ -43,7 +43,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded',
               },
               method: 'POST',
-              url: app.globalData.url + 'djlj/weixin/sqdjlj',
+              url: app.globalData.url + 'weixin/sqdjlj',
               data: {
                 djlj: _this.data.explain,
                 phone: _this.data.phoneNumber,
@@ -51,13 +51,13 @@ Page({
               },
               success: function(result) {
                 if (result.data) {
+                  wx.switchTab({
+                    url: '../index/index'
+                  })
                   wx.showToast({
                     title: '操作成功',
                     duration: 2000,
                     icon: 'success'
-                  })
-                  wx.switchTab({
-                    url: '../index/index'
                   })
                 } else {
                   wx.showModal({

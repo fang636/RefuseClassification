@@ -50,9 +50,9 @@
 					"scene": 1011
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "myStyle",
-					"pathName": "pages/detail/detail",
+					"pathName": "pages/loading/loading",
 					"query": "",
 					"scene": null
 				}

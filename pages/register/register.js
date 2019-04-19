@@ -102,7 +102,7 @@ Page({
         header: {
           'content-type': 'application/x-www-form-urlencoded',
         },
-        url: app.globalData.url + 'user/weixin/addphone',
+        url: app.globalData.url + 'weixin/addphone',
         data: {
           openId: app.globalData.openId,
           phone: phone

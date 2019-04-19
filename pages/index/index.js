@@ -182,7 +182,7 @@ Page({
     //   console.log(`formId不能为空`)
     //   return false;
     // }
-    var url = app.globalData.url + 'user/weixin/saveFormId'
+    var url = app.globalData.url + 'weixin/saveFormId'
     var data = {
       openId: app.globalData.openId,
       formId: formId
