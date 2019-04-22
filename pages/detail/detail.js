@@ -32,15 +32,16 @@ Page({
     }
 
     //以上为开始处理的参数
-
-
-    if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
-      content = '是否完成服务？'
-      url = app.globalData.url + 'weixin/wccldwj',
-        data = {
-          id: this.data.info.id,
-        }
+    if (_this.data.info.hw != null) {
+      if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
+        content = '是否完成服务？'
+        url = app.globalData.url + 'weixin/wccldwj',
+          data = {
+            id: this.data.info.id,
+          }
+      }
     }
+
     wx.showModal({
       title: '提示',
       content: content,
