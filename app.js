@@ -69,26 +69,13 @@ App({
             })
           }
         })
-        // wx.request({
-        //   url: 'https://api.weixin.qq.com/sns/jscode2session',
-        //   data: {
-        //     appid: 'wx25f3f3a84e45348d',
-        //     secret: 'baca523e58ca5c4e58210c4187b418eb',
-        //     js_code: res.code,
-        //     grant_type: 'authorizattion_code'
-        //   },
-        //   method: 'GET',
-        //   success: function(result) {
-
-        //   }
-        // })
       }
     })
   },
   globalData: {
-    url: 'http://192.168.52.59/gsm/', //服务器地址
+    url: 'http://192.168.52.83/gsm/', //服务器地址
     //url: 'http://localhost/gsm/', //服务器地址
-    //url: 'http://www.51baiyao.com:8085/gsm/',
+    //url: 'https://baiyao.51baiyao.com/gsm/',
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
@@ -183,13 +170,6 @@ App({
     if (type == '' || type == null) {
       type = 'JSON'
     }
-    // console.log('url:' + url)
-    // console.log('data:')
-    // console.log(data)
-    // console.log('type:')
-    // console.log(type)
-    // console.log('tsuccess:')
-    // console.log(success)
     wx.request({
       header: {
         'content-type': 'application/x-www-form-urlencoded',

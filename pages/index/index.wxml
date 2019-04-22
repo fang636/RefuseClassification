@@ -20,4 +20,5 @@
     </view>
   </view>
 
+<button bindtap='testHander'>推送测试</button>
 </view>
