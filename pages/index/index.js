@@ -53,17 +53,6 @@ Page({
       }
     ]
   },
-
-  testHander: function(e) {
-    app.myRequest(app.globalData.url + 'weixin/test', {
-        openId: app.globalData.openId
-      },
-      null,
-      function(result) {
-        console.log(result)
-      }
-    )
-  },
   onLoad: function(options) {
     this.onShow()
     wx.hideLoading()

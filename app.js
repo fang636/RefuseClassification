@@ -73,8 +73,8 @@ App({
     })
   },
   globalData: {
-    //url: 'http://192.168.52.83/gsm/', //服务器地址
-    url: 'http://localhost/gsm/', //服务器地址
+    url: 'http://192.168.52.83/gsm/', //服务器地址
+    //url: 'http://localhost/gsm/', //服务器地址
     //url: 'https://baiyao.51baiyao.com/gsm/',
     userInfo: null, //微信用户基本数据
     openId: '',
@@ -101,6 +101,7 @@ App({
       dataType: 'json',
 
       success: function(result) {
+        console.log(result)
         if (!result.data) { //没有账号信息--执行注册
           console.log('没有账号信息--执行注册')
           wx.request({

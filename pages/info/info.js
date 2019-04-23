@@ -49,7 +49,7 @@ Page({
     app.myRequest(url, {
       openId: app.globalData.openId
     }, null, function(result) {
-      //console.log(result)
+      console.log(result)
       var res_info
       if (result.statusCode == 200) {
         if (result.data.length > 0) {
