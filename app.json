@@ -8,7 +8,8 @@
     "pages/my/my",
     "pages/QRcode/QRcode",
     "pages/bigThing/bigThing",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/violation/violation"
   ],
   "window": {
     "backgroundTextStyle": "light",

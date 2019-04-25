@@ -144,7 +144,9 @@ Page({
         })
         break
       case 'violation':
-
+        wx.navigateTo({
+          url: '../violation/violation'
+        })
         break
     }
   },

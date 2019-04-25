@@ -73,9 +73,9 @@ App({
     })
   },
   globalData: {
-    url: 'http://192.168.52.83/gsm/', //服务器地址
+    //url: 'http://192.168.52.83/gsm/', //服务器地址
     //url: 'http://localhost/gsm/', //服务器地址
-    //url: 'https://baiyao.51baiyao.com/gsm/',
+    url: 'https://baiyao.51baiyao.com/gsm/',
     userInfo: null, //微信用户基本数据
     openId: '',
     userModel: '' //后台用户对象
