@@ -1,21 +1,21 @@
 <view class='myContainer'>
 
-  <view class='info'>
+  <view class='info' wx:if='{{info!=null}}' wx:for='{{info}}' wx:key='id' bindtap='bindClickHander' data-id='{{item.id}}'>
     <view class='title'>
       <text class='tit'>垃圾桶编号:</text>
-      <text class='state'>444</text>
+      <text class='state'>{{item.bh}}</text>
     </view>
 
     <view class='content'>
       <view class='textBox'>
         <view class='textBox_warp'>
           <view class='warp_head'>地点</view>
-          <view class='warp_body'>测试</view>
+          <view class='warp_body'>{{item.parentName}}</view>
         </view>
 
         <view class='textBox_warp_big'>
           <view class='warp_head'>状态</view>
-          <view class='warp_body'>良好</view>
+          <view class='warp_body'>{{item.zt}}</view>
         </view>
       </view>
     </view>

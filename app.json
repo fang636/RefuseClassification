@@ -11,8 +11,9 @@
     "pages/detail/detail",
     "pages/violation/violation",
     "pages/ydy_list/ydy_list",
-    "pages/ydy_list2/ydy_list2",
-    "pages/ydy_report/ydy_report"
+    "pages/ydy_report/ydy_report",
+    "pages/list_detail/list_detail",
+    "pages/ydy_report_wh/ydy_report_wh"
   ],
   "window": {
     "backgroundTextStyle": "light",

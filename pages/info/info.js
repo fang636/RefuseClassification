@@ -40,10 +40,10 @@ Page({
     const _this = this
     var url = app.globalData.url + 'weixin/getAll'
 
-    if (app.globalData.userModel.sf == 'ROLE_TEST') {
+    if (app.globalData.userModel.sf == 'ROLE_USHER') {
       url = app.globalData.url + 'weixin/czdjlj'
       this.setData({
-        state: 'test'
+        state: 'USHER'
       })
     }
     app.myRequest(url, {

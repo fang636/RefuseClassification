@@ -12,7 +12,7 @@
     </view>
   </view>
 
-  <view class='info big' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='test'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
+  <view class='info big' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='USHER'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
     <view class='title'>
       <text class='tit'>操作类型: {{cztype}}</text>
       <text class='state {{item.status=="申请中"?"greenText":""}}'>{{item.status}}</text>

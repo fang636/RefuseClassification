@@ -55,7 +55,6 @@ Page({
     cord: null //卡片
   },
   onLoad: function(options) {
-    this.onShow()
     wx.hideLoading()
     if (app.globalData.userInfo) {
       this.setData({
@@ -83,15 +82,60 @@ Page({
         }
       })
     }
-    if (options.state == 'sandCode') {
+
+
+    var userModel = app.globalData.userModel
+    //console.log(userModel)
+    if (userModel.sf == 'ROLE_HWGR') {
+      console.log('环卫工人登录===')
       this.setData({
-        test: 'asdsasa'
+        toolBar: [{
+            image: '../../images/list.png',
+            text: '管理列表',
+            key: 'ydy_list'
+          },
+          {
+            image: '../../images/edit.png',
+            text: '违规反馈',
+            key: 'violation'
+          }
+        ]
       })
-    } else {
-      this.setData({
-        test: '不是扫码'
-      })
+      return
     }
+    if (userModel.sf == 'ROLE_USHER') {
+      console.log('引导员登录===')
+      this.setData({
+        toolBar: [{
+            image: '../../images/manger.png',
+            text: '大物件',
+            key: 'ydy_bigThingManger'
+          },
+          {
+            image: '../../images/list.png',
+            text: '管理列表',
+            key: 'ydy_list'
+          },
+          {
+            image: '../../images/report.png',
+            text: '上报',
+            key: 'ydy_report'
+          }
+        ],
+        cord: [{
+            key: 'ydy_deposit',
+            text: '垃圾袋存放'
+          },
+          {
+            key: 'ydy_maintain',
+            text: '设备维护'
+          }
+
+        ]
+      })
+      return
+    }
+
   },
 
   /**
@@ -154,66 +198,21 @@ Page({
           url: '../ydy_list/ydy_list'
         })
         break
-
       case 'ydy_report':
         wx.navigateTo({
           url: '../ydy_report/ydy_report'
         })
         break
+      case 'ydy_maintain':
+        wx.navigateTo({
+          url: '../ydy_list/ydy_list'
+        })
+
     }
   },
   //环卫工人登录时切换工具栏
   onShow: function() {
-    var userModel = app.globalData.userModel
-    //console.log(userModel)
-    if (userModel.sf == 'ROLE_HWGR') {
-      console.log('环卫工人登录===')
-      this.setData({
-        toolBar: [{
-            image: '../../images/manger.png',
-            text: '大物件',
-            key: 'bigThingManger'
-          },
-          {
-            image: '../../images/edit.png',
-            text: '违规反馈',
-            key: 'violation'
-          }
-        ]
-      })
-      return
-    }
-    if (userModel.sf == 'ROLE_TEST') {
-      console.log('引导员登录===')
-      this.setData({
-        toolBar: [{
-            image: '../../images/manger.png',
-            text: '大物件',
-            key: 'ydy_bigThingManger'
-          },
-          {
-            image: '../../images/list.png',
-            text: '管理列表',
-            key: 'ydy_list'
-          },
-          {
-            image: '../../images/report.png',
-            text: '上报',
-            key: 'ydy_report'
-          }
-        ],
-        cord: [{
-            key: 'ydy_deposit',
-            text: '垃圾袋存放'
-          },
-          {
-            key: 'ydy_maintain',
-            text: '设备维护'
-          }
 
-        ]
-      })
-    }
 
   },
   getFormId: function(res) {

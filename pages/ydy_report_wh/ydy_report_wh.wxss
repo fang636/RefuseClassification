@@ -1,3 +1,5 @@
+/* pages/bigThing/bigThing.wxss */
+
 .myContainer {
   display: flex;
   flex-direction: column;
@@ -44,11 +46,6 @@
   font-size: 36rpx;
 }
 
-.center {
-  align-items: center;
-  text-align: center;
-}
-
 .row_head {
   margin-right: 20rpx;
 }
@@ -69,22 +66,7 @@
   display: block;
 }
 
-button {
+button{
   margin-top: 50rpx;
 }
 
-.myPicker-view {
-  margin: 20rpx 0;
-  text-align: center;
-  width: 500rpx;
-  height: 180rpx;
-  font-size: 35rpx;
-}
-
-.picker-column {
-  line-height: 65rpx;
-}
-
-.mask {
-  background: none;
-}
