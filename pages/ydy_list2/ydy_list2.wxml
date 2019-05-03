@@ -1,0 +1,24 @@
+<view class='myContainer'>
+
+  <view class='info'>
+    <view class='title'>
+      <text class='tit'>取袋机编号:</text>
+      <text class='state'>444</text>
+    </view>
+
+    <view class='content'>
+      <view class='textBox'>
+        <view class='textBox_warp'>
+          <view class='warp_head'>地点</view>
+          <view class='warp_body'>测试</view>
+        </view>
+
+        <view class='textBox_warp_big'>
+          <view class='warp_head'>状态</view>
+          <view class='warp_body'>良好</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

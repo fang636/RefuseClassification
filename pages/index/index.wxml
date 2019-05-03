@@ -19,5 +19,12 @@
       </form>
     </view>
   </view>
-  
+
+  <view class='cordBox' wx:if='{{cord!=null}}'>
+    <view class='cord_wrap' bindtap='toolBarHander' wx:for='{{cord}}' data-key='{{item.key}}' wx:key='key'>
+      <text>{{item.text}}</text>
+    </view>
+  </view>
+
+
 </view>

@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 .myContainer {
   display: flex;
   flex-direction: column;
@@ -63,4 +64,29 @@ swiper-item image {
   font-size: 16px;
   color: #aaa;
   margin-top: 5rpx;
+}
+
+.cordBox {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cord_wrap {
+  flex: 1;
+  background-color: #33d38b;
+  height: 120rpx;
+  margin: 0 20rpx;
+  box-shadow: 0 0 6rpx #e0e0e0;
+  border-radius: 15rpx;
+  text-align: center;
+}
+
+.cord_wrap text {
+  height: 120rpx;
+  line-height: 120rpx;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  color: white;
 }

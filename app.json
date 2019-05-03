@@ -9,7 +9,10 @@
     "pages/QRcode/QRcode",
     "pages/bigThing/bigThing",
     "pages/detail/detail",
-    "pages/violation/violation"
+    "pages/violation/violation",
+    "pages/ydy_list/ydy_list",
+    "pages/ydy_list2/ydy_list2",
+    "pages/ydy_report/ydy_report"
   ],
   "window": {
     "backgroundTextStyle": "light",
