@@ -8,7 +8,7 @@ Page({
   data: {
     info: {},
     startBtnState: false,
-    startBtnText: '开始处理'
+    startBtnText: '指派人员处理'
   },
   /**
    * 联系用户(打电话)
@@ -22,47 +22,12 @@ Page({
    * 处理大物件事件
    */
   startHander: function(e) {
-    const _this = this
-    var title = '提示'
-    var content = '是否接受申请？'
-    var url = app.globalData.url + 'weixin/hwcldwj'
-    var data = {
-      id: this.data.info.id,
-      hwopenId: app.globalData.openId
+    var id = this.data.info.id
+    if (app.globalData.userModel.sf == 'ROLE_USHER') {
+      wx.navigateTo({
+        url: '../ydy_assign/ydy_assign?id='+id
+      })
     }
-
-    //以上为开始处理的参数
-    if (_this.data.info.hw != null) {
-      if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
-        content = '是否完成服务？'
-        url = app.globalData.url + 'weixin/wccldwj',
-          data = {
-            id: this.data.info.id,
-          }
-      }
-    }
-
-    wx.showModal({
-      title: '提示',
-      content: content,
-      success: function(result) {
-        if (result.confirm) {
-          app.myRequest(url, data, null, function(result) {
-            if (result) {
-              wx.switchTab({
-                url: '../info/info'
-              })
-              wx.showToast({
-                title: '操作完成',
-                image: '../../images/okay.png',
-                duration: 2000
-              })
-            }
-          })
-        }
-      }
-    })
-
   },
   /**
    * 生命周期函数--监听页面加载
@@ -82,14 +47,11 @@ Page({
       _this.setData({
         info: res_info
       })
-      console.log(_this.data.info)
+      //console.log(_this.data.info)
       if (_this.data.info.status == '处理中') {
-        var startBtnText = '已由' + _this.data.info.hw.nickName + '处理中';
+        var startBtnText = '已由xxx' + '处理中';
         var startBtnState = true
-        if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
-          startBtnText = '完成服务'
-          startBtnState = false
-        }
+
         _this.setData({
           startBtnState: startBtnState,
           startBtnText: startBtnText

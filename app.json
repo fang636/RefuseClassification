@@ -13,7 +13,8 @@
     "pages/ydy_list/ydy_list",
     "pages/ydy_report/ydy_report",
     "pages/list_detail/list_detail",
-    "pages/ydy_report_wh/ydy_report_wh"
+    "pages/ydy_report_wh/ydy_report_wh",
+    "pages/ydy_assign/ydy_assign"
   ],
   "window": {
     "backgroundTextStyle": "light",

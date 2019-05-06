@@ -66,7 +66,6 @@
 }
 
 .row_area_head {
-  padding: 0 24rpx;
   display: block;
 }
 
@@ -74,20 +73,18 @@ button {
   margin-top: 50rpx;
 }
 
-.select {
-  width: 100%;
-  height: 90rpx;
-  padding: 0 24rpx;
-  box-sizing: border-box;
-  line-height: 90rpx;
+.myPicker-view {
+  margin: 20rpx 0;
   text-align: center;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1rpx solid #e0e0e0;
-  border-bottom: 1rpx solid #e0e0e0;
-  box-shadow: 0 0 5rpx #e0e0e0;
+  width: 500rpx;
+  height: 180rpx;
+  font-size: 35rpx;
 }
 
-textarea {
-  padding: 0 24rpx;
+.picker-column {
+  line-height: 65rpx;
+}
+
+.mask {
+  background: none;
 }

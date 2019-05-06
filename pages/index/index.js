@@ -26,6 +26,9 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     test: '',
+    aaa: ['aaa', 'bbb', 'ccc'],
+    bbb: ['aaa', 'bbb', 'ccc'],
+    ccc: ['aaa', 'bbb', 'ccc'],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     //轮播图
     images: [{
@@ -131,6 +134,18 @@ Page({
             text: '设备维护'
           }
 
+        ]
+      })
+      return
+    }
+    if (userModel.sf == 'ROLE_TEST') {
+      console.log('回收站登录===')
+      this.setData({
+        toolBar: [{
+          image: '../../images/manger.png',
+          text: '大物件回收',
+          key: 'ydy_bigThingManger'
+        }
         ]
       })
       return

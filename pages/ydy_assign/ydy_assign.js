@@ -1,50 +1,39 @@
-// pages/QRcode/QRcode.js
+// pages/ydy_report/ydy_report.js
 const app = getApp()
-const QR = require('../../utils/weapp-qrcode.js')
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    qrcodeURL: ''
+    aaa: ['aaa', 'bbb', 'ccc'],
+    bbb: ['aaa', 'bbb', 'ccc'],
+    ccc: ['aaa', 'bbb', 'ccc'],
+    a: '',
+    b: '',
+    c: '',
+    remarks: ''
   },
-
+  bindChange(e) {
+    const val = e.detail.value
+    this.setData({
+      a: this.data.aaa[val[0]],
+      b: this.data.bbb[val[1]],
+      c: this.data.ccc[val[2]]
+    })
+  },
+  remarksChangeHander: function(e) {
+    this.setData({
+      remarks: e.detail.value
+    })
+  },
+  submitHander: function(e) {
+    //app.myRequest()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //准备数据并生成二维码
-    var state = options.state
-    var myData =
-      '{"openId":"' +
-      app.globalData.openId +
-      '","state":"' +
-      state +
-      '"}'
-    //console.log(JSON.parse(myData))
-    var imgData = QR.drawImg(myData, {
-      typeNumber: 4,
-      errorCorrectLevel: 'M',
-      size: 500
-    })
-    this.setData({
-      qrcodeURL: imgData
-    })
-
-    wx.request({
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-      url: app.globalData.url + 'weixin/qrfd',
-      method: 'POST',
-      data: {
-        state: state,
-        bh: '233',
-        openId: app.globalData.openId,
-        ljdbh:'aaaaaaaaa' 
-      }
-    })
+    console.log(options.id)
   },
 
   /**
