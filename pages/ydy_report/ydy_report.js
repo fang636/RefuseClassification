@@ -8,9 +8,13 @@ Page({
     remarks: '',
     selectText: '选择地区',
     multiArray: [], //地区数据
-    objectmMultiArray: {}, //详细地区数据
-    itemMultiArray: [], //二级地区数据(可能后续用到)
-    objectItemMultiArray: {} //详细二级地区数据(可能后续用到)
+    objectMultiArray: null, //详细地区数据
+    itemMultiArray: [], //二级地区数据
+    objectItemMultiArray: null, //详细二级地区数据
+    recycleBinArray: [], //回收站数据
+    objectRecycleBinArray: null, //详细回收站数据
+
+    index: [0, 0]
   },
 
 
@@ -34,6 +38,7 @@ Page({
    */
   getTapData: function() {
     const _this = this
+
     app.myRequest2(app.globalData.url + 'weixin/sysDeptXQ', {}, null, function(result) {
       if (result.statusCode == 200) {
         var multiArray = []
@@ -46,11 +51,16 @@ Page({
         }
         multiArray.push(flag)
         multiArray.push(['--'])
-        multiArray.push(['--'])
         _this.setData({
           multiArray: multiArray,
-          objectmMultiArray: result.data
+          objectMultiArray: result.data
         })
+        var objectItemMultiArray = _this.data.objectItemMultiArray
+        if (objectItemMultiArray == null) {
+          _this.getNextRegion(result.data[0].id)
+
+        }
+
       } else {
         wx.showModal({
           title: '提示',
@@ -79,7 +89,7 @@ Page({
   },
 
   /**
-   * 取出下一级地区并回写到地区数据
+   * 取出下一级地区并加入到选项
    * parentId 父级id
    */
   getNextRegion: function(parentId) {
@@ -88,7 +98,7 @@ Page({
       id: parentId
     }, null, function(result) {
       if (result.statusCode == 200) {
-        console.log(result.data)
+        //console.log(result.data)
         var multiArray = _this.data.multiArray //取出原有数据准备进行操作
         var flag = []
         for (var i in result.data) {
@@ -129,18 +139,88 @@ Page({
       })
     })
   },
-
+  /**
+   * 根据地区获取对应的回收站并加入到选项
+   */
+  getRecycleBin: function(deptId) {
+    const _this = this
+    app.myRequest2(app.globalData.url + 'weixin/fjId', {
+      id: parentId
+    }, null, function(result) {
+      if (result.statusCode == 200) {
+        console.log(result.data)
+        var multiArray = _this.data.multiArray //取出原有数据准备进行操作
+        var flag = []
+        for (var i in result.data) {
+          flag.push(result.data[i].name)
+        }
+        if (flag.length == 0) {
+          flag.push('无数据')
+        }
+        multiArray[1] = flag //写入二级地区数据
+        _this.setData({
+          multiArray: multiArray,
+          recycleBinArray: flag,
+          objectrecycleBinArrayMultiArray: result.data
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '获取数据失败，请重试',
+          confirmText: '重新连接',
+          success: function(res) {
+            if (res.confirm) {
+              _this.getRecycleBin()
+            }
+          }
+        })
+      }
+    }, function(result) {
+      wx.showModal({
+        title: '提示',
+        content: '获取数据失败，请重试',
+        confirmText: '重新连接',
+        success: function(res) {
+          if (res.confirm) {
+            _this.getRecycleBin()
+          }
+        }
+      })
+    })
+  },
   bindMultiPickerColumnChange: function(e) {
-    console.log('被修改的列：' + e.detail.column + '值为:' + e.detail.value)
+    //console.log('被修改的列：' + e.detail.column + '值为:' + e.detail.value)
     //修改第一列，获取第二列数据
     if (e.detail.column == 0) {
-      var currentData = this.data.objectmMultiArray[e.detail.value] //获取当前选中的数据
+      //先置空数据
+      this.setData({
+        itemMultiArray: [],
+        objectItemMultiArray: null
+      })
+      var currentData = this.data.objectMultiArray[e.detail.value] //获取当前选中的数据
       this.getNextRegion(currentData.id)
+      this.data.index[0] = e.detail.value
     }
-    //修改第二列，获取第三列数据
+    //修改第二列...
     if (e.detail.column == 1) {
-
+      // var currentData = this.data.objectItemMultiArray[e.detail.value]//获取当前选中的数据
+      // this.getRecycleBin()
+      this.data.index[1] = e.detail.value
+      //console.log(this.data.select)
     }
+    var objectMultiArray = this.data.objectMultiArray
+    var objectItemMultiArray = this.data.objectItemMultiArray
+    var index = this.data.index
+    if (objectItemMultiArray != null) {
+      this.setData({
+        selectText: '当前:' + objectMultiArray[index[0]].name + '-' + objectItemMultiArray[index[1]].name
+      })
+    } else {
+      this.setData({
+        selectText: '当前:' + objectMultiArray[index[0]].name + '-' + ''
+      })
+    }
+
   },
   submitHander: function(e) {
     //app.myRequest()
@@ -150,6 +230,7 @@ Page({
    */
   onLoad: function(options) {
     this.getTapData()
+    //this.getNextRegion() //默认先选择第一条数据
   },
 
   /**

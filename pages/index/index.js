@@ -26,13 +26,10 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     test: '',
-    aaa: ['aaa', 'bbb', 'ccc'],
-    bbb: ['aaa', 'bbb', 'ccc'],
-    ccc: ['aaa', 'bbb', 'ccc'],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     //轮播图
     images: [{
-        url: '../../images/hb.jpg'
+        url: '../../images/5.png'
       },
       {
         url: '../../images/hb.jpg'
@@ -53,6 +50,11 @@ Page({
         image: '../../images/record3.png',
         text: '记录',
         key: 'record'
+      },
+      {
+        image: '../../images/scanCode.png',
+        text: '扫码测试',
+        key: 'testQRcode'
       }
     ],
     cord: null //卡片
@@ -145,8 +147,7 @@ Page({
           image: '../../images/manger.png',
           text: '大物件回收',
           key: 'ydy_bigThingManger'
-        }
-        ]
+        }]
       })
       return
     }
@@ -159,31 +160,7 @@ Page({
   toolBarHander: function(e) {
     switch (e.currentTarget.dataset.key) {
       case 'QRcode':
-        /* wx.scanCode({
-         success: (res) => {
-            console.log(res)
-            var obj = null
-            try {
-              var obj = JSON.parse('{'+res.result+'}')
-            } catch (e) {
-              console.log(e)
-            }
-            console.log(obj)
-            wx.showToast({
-              title: '成功',
-              icon: 'success',
-              duration: 2000
-            })
-          },
-          fail: (res) => {
-            wx.showToast({
-              title: '失败',
-              icon: 'none',
-              duration: 2000
-            })
-          },
-          complete: (res) => {}
-        }) */
+
         wx.navigateTo({
           url: '../QRcode/QRcode?state=aaa'
         })
@@ -222,6 +199,40 @@ Page({
         wx.navigateTo({
           url: '../ydy_list/ydy_list'
         })
+        break
+      case 'testQRcode':
+        wx.scanCode({
+          success: (res) => {
+            console.log(res)
+            wx.request({
+              header: {
+                'content-type': 'application/x-www-form-urlencoded',
+              },
+              url: app.globalData.url + 'weixin/qrfd',
+              method: 'POST',
+              data: {
+                state: 'aaa',
+                bh: '233',
+                openId: app.globalData.openId,
+                ljdbh: res.result
+              }
+            })
+            wx.showToast({
+              title: '成功',
+              icon: 'success',
+              duration: 2000
+            })
+          },
+          fail: (res) => {
+            wx.showToast({
+              title: '失败',
+              icon: 'none',
+              duration: 2000
+            })
+          },
+          complete: (res) => {}
+        })
+        break
 
     }
   },

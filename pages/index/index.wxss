@@ -30,6 +30,7 @@
 
 swiper {
   height: 330rpx;
+  
   box-shadow: 0 0 5rpx #e0e0e0;
 }
 
