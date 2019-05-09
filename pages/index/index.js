@@ -47,14 +47,14 @@ Page({
         key: 'bigThing'
       },
       {
-        image: '../../images/record3.png',
-        text: '记录',
-        key: 'record'
-      },
-      {
         image: '../../images/scanCode.png',
         text: '扫码测试',
         key: 'testQRcode'
+      },
+      {
+        image: '../../images/record3.png',
+        text: '记录',
+        key: 'record'
       }
     ],
     cord: null //卡片
@@ -129,10 +129,12 @@ Page({
         ],
         cord: [{
             key: 'ydy_deposit',
+            image:'../../images/cord1.jpg',
             text: '垃圾袋存放'
           },
           {
             key: 'ydy_maintain',
+            image: '../../images/cord1.jpg',
             text: '设备维护'
           }
 

@@ -3,8 +3,20 @@
 .myContainer {
   display: flex;
   flex-direction: column;
-  border-top: 1rpx solid #e0e0e0;
   margin: 0 20rpx;
+}
+
+.title {
+  flex: 0 0 auto;
+}
+
+.content {
+  flex: 0 1 auto;
+  height: 600rpx;
+}
+
+.footer {
+  flex: 0 0 auto;
 }
 
 .userinfo {
@@ -29,8 +41,8 @@
 }
 
 swiper {
-  height: 330rpx;
-  
+  height: 340rpx;
+  width: 100%;
   box-shadow: 0 0 5rpx #e0e0e0;
 }
 
@@ -39,6 +51,19 @@ swiper-item image {
   display: inline-block;
   overflow: hidden;
   height: 100%;
+  border-radius: 18rpx;
+}
+
+.mySwiper {
+  height: 260rpx;
+  width: 100%;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}
+
+.mySwiper swiper-item image {
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
   border-radius: 18rpx;
 }
 
@@ -73,10 +98,26 @@ swiper-item image {
   flex-wrap: wrap;
 }
 
+.cordBox image {
+  flex: 1;
+  height: 120rpx;
+  margin: 0 20rpx;
+  box-shadow: 0 0 6rpx #e0e0e0;
+  border-radius: 15rpx;
+  text-align: center;
+  z-index: 0;
+}
+
+.cordBox image text {
+  color: #000;
+  z-index: 1;
+}
+
 .cord_wrap {
   flex: 1;
-  background-color: #33d38b;
   height: 120rpx;
+  background-color: #33d38b;
+  background-size: 100%;
   margin: 0 20rpx;
   box-shadow: 0 0 6rpx #e0e0e0;
   border-radius: 15rpx;
