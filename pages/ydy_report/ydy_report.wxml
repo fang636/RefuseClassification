@@ -9,7 +9,7 @@
       </picker>
     </view>
      <view class='row_area_wrap'>
-      <picker  bindchange="" bindcolumnchange="" range="{{hwg}}" bindchange='hwgPickerChange' bindcolumnchange='pickerColumnChange'>
+      <picker bindcolumnchange="" range="{{hwg}}" bindchange='hwgPickerChange' bindcolumnchange='pickerColumnChange'>
         <view class='select' bindtap='clickHwgHander'>
           {{hwgSelectText}}
         </view>

@@ -202,7 +202,7 @@ Page({
       id: deptId
     }, null, function(result) {
       if (result.statusCode == 200) {
-        console.log(result.data)
+        //console.log(result.data)
         var data = result.data
         if (data != null) {
           var flag = []
@@ -348,11 +348,12 @@ Page({
       var hwg = this.data.hwg_select
       if (hwg != null && hwg != undefined) {
         var remarks = this.data.remarks
-        console.log(hwg)
+        //console.log(hwg)
         app.myRequest2(app.globalData.url + 'weixin/hwtsxx', {
           qyid: select2.id,
           hwid: hwg.id,
-          tslr: remarks
+          tslr: remarks,
+          ydyid: app.globalData.userModel.id
         }, null, function(result) {
           if (result.statusCode == 200) {
             if (result) {
@@ -428,7 +429,7 @@ Page({
     this.data.select1 = null
     this.data.select2 = null
     this.data.hwg = [],
-    this.data.hwg_select = null
+      this.data.hwg_select = null
   },
 
   /**

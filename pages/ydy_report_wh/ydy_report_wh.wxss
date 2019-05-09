@@ -63,10 +63,33 @@
 }
 
 .row_area_head {
+  padding: 0 24rpx;
   display: block;
 }
 
-button{
+.row_area_body {
+  padding: 0 24rpx;
+}
+
+button {
   margin-top: 50rpx;
 }
 
+.btn {
+  width: 175rpx;
+  text-align: center;
+}
+
+.select {
+  width: 100%;
+  height: 90rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  line-height: 90rpx;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx solid #e0e0e0;
+  border-bottom: 1rpx solid #e0e0e0;
+  box-shadow: 0 0 5rpx #e0e0e0;
+}

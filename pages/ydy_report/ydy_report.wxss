@@ -88,6 +88,6 @@ button {
   box-shadow: 0 0 5rpx #e0e0e0;
 }
 
-textarea {
+.row_area_body {
   padding: 0 24rpx;
 }
