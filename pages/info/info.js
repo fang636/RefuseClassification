@@ -46,7 +46,7 @@ Page({
         state: 'USHER'
       })
     }
-    app.myRequest(url, {
+    app.myRequest2(url, {
       openId: app.globalData.openId
     }, null, function(result) {
       console.log(result)
@@ -62,6 +62,17 @@ Page({
       }
       _this.setData({
         info: res_info
+      })
+    }, function(result) {
+      wx.showModal({
+        title: '提示',
+        content: '连接服务器失败',
+        confirmText: '重新连接',
+        success: function(res) {
+          if (res.confirm) {
+            _this.onShow()
+          }
+        }
       })
     })
 

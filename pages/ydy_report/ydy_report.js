@@ -144,55 +144,7 @@ Page({
       })
     })
   },
-  /**
-   * 根据地区获取对应的回收站并加入到选项
-   */
-  getRecycleBin: function(deptId) {
-    const _this = this
-    app.myRequest2(app.globalData.url + 'weixin/', {
-      id: parentId
-    }, null, function(result) {
-      if (result.statusCode == 200) {
-        console.log(result.data)
-        var multiArray = _this.data.multiArray //取出原有数据准备进行操作
-        var flag = []
-        for (var i in result.data) {
-          flag.push(result.data[i].name)
-        }
-        if (flag.length == 0) {
-          flag.push('无数据')
-        }
-        multiArray[1] = flag //写入二级地区数据
-        _this.setData({
-          multiArray: multiArray,
-          recycleBinArray: flag,
-          objectrecycleBinArrayMultiArray: result.data
-        })
-      } else {
-        wx.showModal({
-          title: '提示',
-          content: '获取数据失败，请重试',
-          confirmText: '重新连接',
-          success: function(res) {
-            if (res.confirm) {
-              _this.getRecycleBin()
-            }
-          }
-        })
-      }
-    }, function(result) {
-      wx.showModal({
-        title: '提示',
-        content: '获取数据失败，请重试',
-        confirmText: '重新连接',
-        success: function(res) {
-          if (res.confirm) {
-            _this.getRecycleBin()
-          }
-        }
-      })
-    })
-  },
+  
   /**
    * 根据地区获取对应的环卫工
    */

@@ -1,10 +1,10 @@
 <!--pages/info/info.wxml-->
 <view class='myContainer'>
 
-  <view class='info' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='plain'}}">
+  <view class='info' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&state=='plain'}}">
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
-      <text class='state {{item.status=="申请中" ? "greenText": ""}}'>{{item.status}}</text>
+      <text class='state {{item.status=="待审核" ? "greenText": ""}}'>{{item.status}}</text>
     </view>
     <view class='content'>
       <text wx:if="{{item.jqbh!=null}}">机器编号: {{item.jqbh}}</text>
@@ -12,7 +12,7 @@
     </view>
   </view>
 
-  <view class='info big' wx:for="{{info}}" wx:key="id" wx:if="{{info!=[]&&state=='USHER'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
+  <view class='info big' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&state=='USHER'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
       <text class='state {{item.status=="申请中"?"greenText":""}}'>{{item.status}}</text>

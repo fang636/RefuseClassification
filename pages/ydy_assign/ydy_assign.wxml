@@ -1,17 +1,20 @@
 <view class='myContainer'>
   <view class='formbox'>
-    <view class='center'>
-      <picker-view indicator-style='height:65rpx;' class='myPicker-view' mask-class='mask' bindchange="bindChange" value='{{value}}'>
-        <picker-view-column>
-          <view wx:for="{{aaa}}" class='picker-column'>市{{item}}</view>
-        </picker-view-column>
-        <picker-view-column>
-          <view wx:for="{{bbb}}" class='picker-column'>区{{item}}</view>
-        </picker-view-column>
-        <picker-view-column>
-          <view wx:for="{{ccc}}" class='picker-column'>街道{{item}}</view>
-        </picker-view-column>
-      </picker-view>
+
+    <view class='row_area_wrap'>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" range="{{multiArray}}">
+        <view class='select' bindtap='stratSelect'>
+          {{selectText}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='row_area_wrap'>
+      <picker bindcolumnchange="" range="{{recycle}}" bindchange='recyclePickerChange'>
+        <view class='select' bindtap='clickRecycleHander'>
+          {{recycleSelectText}}
+        </view>
+      </picker>
     </view>
 
     <view class='row_area_wrap'>
@@ -21,7 +24,7 @@
       </view>
     </view>
 
-    <button type='primary' bindtap='submitHander'>提交申请</button>
+    <button type='primary' bindtap='submitHander' class='btn'>提交</button>
 
   </view>
 </view>
