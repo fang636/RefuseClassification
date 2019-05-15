@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: null,
     info: {},
     startBtnState: false,
     startBtnText: '指派人员处理'
@@ -25,7 +26,7 @@ Page({
     var id = this.data.info.id
     if (app.globalData.userModel.sf == 'ROLE_USHER') {
       wx.navigateTo({
-        url: '../ydy_assign/ydy_assign?id='+id
+        url: '../ydy_assign/ydy_assign?id=' + id
       })
     }
   },
@@ -33,35 +34,91 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.data.id = options.id
     const _this = this
-    app.myRequest(app.globalData.url + 'weixin/czdjljid', {
-      id: options.id
-    }, null, function(result) {
-      //console.log(result.data)
-      var res_info
-      if (result.statusCode == 200) {
-        res_info = result.data
-      } else {
-        res_info = {}
-      }
-      _this.setData({
-        info: res_info
-      })
-      //console.log(_this.data.info)
-      if (_this.data.info.status == '处理中') {
-        var startBtnText = '已由xxx' + '处理中';
-        var startBtnState = true
 
+    var user = app.globalData.userModel
+    var success = null
+    if (user.sf == 'ROLE_USHER') {
+      success = function(result) {
+        //console.log(result.data)
+        var res_info
+        if (result.statusCode == 200) {
+          res_info = result.data
+        } else {
+          res_info = {}
+        }
         _this.setData({
-          startBtnState: startBtnState,
-          startBtnText: startBtnText
+          info: res_info
         })
-      } else if (_this.data.info.status == '已完成') {
-        _this.setData({
-          startBtnState: true,
-          startBtnText: '已完成'
-        })
+        //console.log(_this.data.info)
+        if (_this.data.info.status == '已审核') {
+          var startBtnText = '已指派' + _this.data.info.wbljhsz.name + '处理中';
+          var startBtnState = true
+
+          _this.setData({
+            startBtnState: startBtnState,
+            startBtnText: startBtnText
+          })
+        } else if (_this.data.info.status == '已完成') {
+          _this.setData({
+            startBtnState: true,
+            startBtnText: '已完成'
+          })
+        }
       }
+    }
+
+
+    if (user.sf == 'ROLE_USHER') {
+      success = function(result) {
+        var res_info
+        if (result.statusCode == 200) {
+          res_info = result.data
+        } else {
+          res_info = {}
+        }
+        _this.setData({
+          info: res_info
+        })
+        //console.log(_this.data.info)
+        if (_this.data.info.status == '已审核') {
+          _this.setData({
+            startBtnText: '开始处理'
+          })
+        } else if (_this.data.info.status == '已出发') {
+          _this.setData({
+            startBtnText: '处理完成'
+          })
+        } else if (_this.data.info.status == '已完成') {
+          _this.setData({
+            startBtnState: true,
+            startBtnText: '已完成'
+          })
+        }
+      }
+    }
+
+
+
+    app.myRequest2(app.globalData.url + 'weixin/czdjljid', {
+      id: _this.data.id
+    }, null, success, function(result) {
+      wx.showModal({
+        title: '提示',
+        content: '连接失败，请检查网络后重试',
+        confirmText: '重新连接',
+        success: function(res) {
+          if (res.confirm) {
+            _this.onLoad()
+          }
+          if (res.cancel) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
     })
 
   },

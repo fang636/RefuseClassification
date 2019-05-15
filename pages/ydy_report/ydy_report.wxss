@@ -71,6 +71,7 @@
 }
 
 button {
+  width: 90%;
   margin-top: 50rpx;
 }
 

@@ -36,27 +36,7 @@ Page({
       }
     ],
     //工具栏
-    toolBar: [{
-        image: '../../images/scanCode.png',
-        text: '取袋',
-        key: 'QRcode'
-      },
-      {
-        image: '../../images/big.png',
-        text: '大件回收',
-        key: 'bigThing'
-      },
-      {
-        image: '../../images/scanCode.png',
-        text: '扫码测试',
-        key: 'testQRcode'
-      },
-      {
-        image: '../../images/record3.png',
-        text: '记录',
-        key: 'record'
-      }
-    ],
+    toolBar: [],
     cord: null //卡片
   },
   onLoad: function(options) {
@@ -91,6 +71,35 @@ Page({
 
     var userModel = app.globalData.userModel
     //console.log(userModel)
+
+    if (userModel.sf == 'ROLE_USER') {
+      console.log('普通用户登录===')
+      this.setData({
+        toolBar: [{
+            image: '../../images/scanCode.png',
+            text: '取袋',
+            key: 'QRcode'
+          },
+          {
+            image: '../../images/big.png',
+            text: '大件回收',
+            key: 'bigThing'
+          },
+          {
+            image: '../../images/scanCode.png',
+            text: '扫码测试',
+            key: 'testQRcode'
+          },
+          {
+            image: '../../images/record3.png',
+            text: '记录',
+            key: 'record'
+          }
+        ]
+      })
+      return
+    }
+
     if (userModel.sf == 'ROLE_HWGR') {
       console.log('环卫工人登录===')
       this.setData({
@@ -129,7 +138,7 @@ Page({
         ],
         cord: [{
             key: 'ydy_deposit',
-            image:'../../images/cord1.jpg',
+            image: '../../images/cord1.jpg',
             text: '垃圾袋存放'
           },
           {
@@ -137,12 +146,11 @@ Page({
             image: '../../images/cord1.jpg',
             text: '设备维护'
           }
-
         ]
       })
       return
     }
-    if (userModel.sf == 'ROLE_TEST') {
+    if (userModel.sf == 'ROLE_WBLJHSZ') {
       console.log('回收站登录===')
       this.setData({
         toolBar: [{

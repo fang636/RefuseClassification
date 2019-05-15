@@ -1,7 +1,7 @@
 <!--pages/info/info.wxml-->
 <view class='myContainer'>
 
-  <view class='info' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&state=='plain'}}">
+  <view class='info' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&state=='USER'}}">
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
       <text class='state {{item.status=="待审核" ? "greenText": ""}}'>{{item.status}}</text>
@@ -12,10 +12,10 @@
     </view>
   </view>
 
-  <view class='info big' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&state=='USHER'}}" bindtap='getDetailHander' data-id='{{item.id}}'>
+  <view class='info big' wx:for="{{info}}" wx:key="{{item.id}}" wx:if="{{info!=[]&&(state=='USHER'||state=='WBLJHSZ')}}" bindtap='getDetailHander' data-id='{{item.id}}'>
     <view class='title'>
       <text class='tit'>操作类型: {{item.cztype}}</text>
-      <text class='state {{item.status=="申请中"?"greenText":""}}'>{{item.status}}</text>
+      <text class='state {{item.status=="待审核"?"greenText":""}} {{state=="WBLJHSZ"&&item.status=="已审核"?"greenText":""}} {{state=="USHER"&&item.status=="已审核"?"navajoText":""}}'>{{item.status}}</text>
     </view>
     <view class='content'>
       <text>地点: {{item.user.parentName}}</text>

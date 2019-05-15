@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: 'plain',
+    state: null,
     info: []
   },
   /**
@@ -38,18 +38,34 @@ Page({
    */
   onShow: function() {
     const _this = this
-    var url = app.globalData.url + 'weixin/getAll'
-
+    var url = ''
+    var data = {}
+    //普通用户查询自己记录
+    if (app.globalData.userModel.sf == 'ROLE_USER') {
+      url = app.globalData.url + 'weixin/getAll'
+      this.setData({
+        state: 'USER'
+      })
+    }
+    //引导员查询所有大物件
     if (app.globalData.userModel.sf == 'ROLE_USHER') {
       url = app.globalData.url + 'weixin/czdjlj'
       this.setData({
         state: 'USHER'
       })
     }
+    //回收站，查找自己接到的大物件记录
+    if (app.globalData.userModel.sf == 'ROLE_WBLJHSZ') {
+      url = app.globalData.url + 'weixin/getdwj'
+      this.setData({
+        state: 'WBLJHSZ'
+      })
+    }
+    //发送请求获取记录数据
     app.myRequest2(url, {
       openId: app.globalData.openId
     }, null, function(result) {
-      console.log(result)
+      //console.log(result)
       var res_info
       if (result.statusCode == 200) {
         if (result.data.length > 0) {
