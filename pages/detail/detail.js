@@ -9,7 +9,8 @@ Page({
     id: null,
     info: {},
     startBtnState: false,
-    startBtnText: '指派人员处理'
+    startBtnText: '指派人员处理',
+    startHanderView: '' //处理方法(方法名)
   },
   /**
    * 联系用户(打电话)
@@ -20,15 +21,113 @@ Page({
     })
   },
   /**
-   * 处理大物件事件
+   * 引导员处理大物件
    */
-  startHander: function(e) {
+  ydy_startHander: function(e) {
     var id = this.data.info.id
-    if (app.globalData.userModel.sf == 'ROLE_USHER') {
-      wx.navigateTo({
-        url: '../ydy_assign/ydy_assign?id=' + id
-      })
-    }
+    wx.navigateTo({
+      url: '../ydy_assign/ydy_assign?id=' + id
+    })
+
+  },
+  /**
+   * 回收站开始处理大物件
+   */
+  hsz_startHander: function(e) {
+    const self = this
+    var id = this.data.info.id
+    wx.showModal({
+      title: '操作提示',
+      content: '是否开始处理该大物件？',
+      success: function(res) {
+        if (res.confirm) {
+          qpp.myRequest2(app.globalData.url + 'weixin/seekdwj', {
+            id: id
+          }, null, function(result) {
+            if (result.statusCode == 200) {
+              if (result) {
+                wx.switchTab({
+                  url: '../info/info'
+                })
+                wx.showToast({
+                  title: '完成',
+                  duration: 2000
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '操作失败，请刷新后重试',
+                  showCancel: false
+                })
+              }
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '连接失败，请刷新后重试',
+                showCancel: false
+              })
+            }
+
+          }, function(result) {
+            wx.showModal({
+              title: '提示',
+              content: '连接失败，请检查网络后重试',
+              showCancel: false
+            })
+          })
+        }
+      }
+    })
+  },
+  /**
+   * 回收站确认完成大物件
+   */
+  hsz_completeHander: function(e) {
+    const self = this
+    var id = this.data.info.id
+    wx.showModal({
+      title: '操作提示',
+      content: '是否确认已完成？',
+      success: function(res) {
+        if (res.confirm) {
+          qpp.myRequest2(app.globalData.url + 'weixin/confirmdwj', {
+            id: id
+          }, null, function(result) {
+            if (result.statusCode == 200) {
+              if (result) {
+                wx.switchTab({
+                  url: '../info/info'
+                })
+                wx.showToast({
+                  title: '完成',
+                  duration: 2000
+                })
+
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '操作失败，请刷新后重试',
+                  showCancel: false
+                })
+              }
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '连接失败，请刷新后重试',
+                showCancel: false
+              })
+            }
+
+          }, function(result) {
+            wx.showModal({
+              title: '提示',
+              content: '连接失败，请检查网络后重试',
+              showCancel: false
+            })
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -49,7 +148,8 @@ Page({
           res_info = {}
         }
         _this.setData({
-          info: res_info
+          info: res_info,
+          startHanderView: 'ydy_startHander'
         })
         //console.log(_this.data.info)
         if (_this.data.info.status == '已审核') {
@@ -70,7 +170,7 @@ Page({
     }
 
 
-    if (user.sf == 'ROLE_USHER') {
+    if (user.sf == 'ROLE_WBLJHSZ') {
       success = function(result) {
         var res_info
         if (result.statusCode == 200) {
@@ -84,11 +184,13 @@ Page({
         //console.log(_this.data.info)
         if (_this.data.info.status == '已审核') {
           _this.setData({
-            startBtnText: '开始处理'
+            startBtnText: '开始处理',
+            startHanderView: 'hsz_startHander'
           })
         } else if (_this.data.info.status == '已出发') {
           _this.setData({
-            startBtnText: '处理完成'
+            startBtnText: '处理完成',
+            startHanderView: 'hsz_completeHander'
           })
         } else if (_this.data.info.status == '已完成') {
           _this.setData({
