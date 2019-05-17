@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    state: 'plain',
+    state: null,
     info: []
   },
   /**
@@ -38,18 +38,34 @@ Page({
    */
   onShow: function() {
     const _this = this
-    var url = app.globalData.url + 'weixin/getAll'
-
-    if (app.globalData.userModel.sf == 'ROLE_HWGR') {
-      url = app.globalData.url + 'weixin/czdjlj'
+    var url = ''
+    var data = {}
+    //普通用户查询自己记录
+    if (app.globalData.userModel.sf == 'ROLE_USER') {
+      url = app.globalData.url + 'weixin/getAll'
       this.setData({
-        state: 'hwg'
+        state: 'USER'
       })
     }
-    app.myRequest(url, {
+    //引导员查询所有大物件
+    if (app.globalData.userModel.sf == 'ROLE_USHER') {
+      url = app.globalData.url + 'weixin/czdjlj'
+      this.setData({
+        state: 'USHER'
+      })
+    }
+    //回收站，查找自己接到的大物件记录
+    if (app.globalData.userModel.sf == 'ROLE_WBLJHSZ') {
+      url = app.globalData.url + 'weixin/getdwj'
+      this.setData({
+        state: 'WBLJHSZ'
+      })
+    }
+    //发送请求获取记录数据
+    app.myRequest2(url, {
       openId: app.globalData.openId
     }, null, function(result) {
-      console.log(result)
+      //console.log(result)
       var res_info
       if (result.statusCode == 200) {
         if (result.data.length > 0) {
@@ -62,6 +78,17 @@ Page({
       }
       _this.setData({
         info: res_info
+      })
+    }, function(result) {
+      wx.showModal({
+        title: '提示',
+        content: '连接服务器失败',
+        confirmText: '重新连接',
+        success: function(res) {
+          if (res.confirm) {
+            _this.onShow()
+          }
+        }
       })
     })
 
@@ -85,6 +112,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    this.onShow()
 
   },
 
@@ -92,7 +120,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    console.log('上拉加载？')
   },
 
   /**

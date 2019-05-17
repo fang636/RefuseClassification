@@ -1,23 +1,41 @@
 <!--index.wxml-->
 <view class='myContainer'>
 
-  <swiper class='mySwiper' indicator-dots='true'>
-    <block wx:for='{{images}}'>
-      <swiper-item>
-        <image src='{{item.url}}'></image>
-      </swiper-item>
-    </block>
-  </swiper>
-
-  <view class='toolBar'>
-    <view class='item' bindtap='toolBarHander' wx:for='{{toolBar}}' data-key='{{item.key}}' wx:key='key'>
-      <form bindsubmit="getFormId" report-submit='true'>
-        <button form-type="submit" class='btnUtil'>
-          <image src='{{item.image}}'></image>
-          <text>{{item.text}}</text>
-        </button>
-      </form>
-    </view>
+  <view class='title'>
+    <swiper class='swiper' indicator-dots='true'>
+      <block wx:for='{{images}}'>
+        <swiper-item>
+          <image src='{{item.url}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  
+
+  <view class='content'>
+    <view class='toolBar'>
+      <view class='item' bindtap='toolBarHander' wx:for='{{toolBar}}' data-key='{{item.key}}' wx:key='key'>
+        <form bindsubmit="getFormId" report-submit='true'>
+          <button form-type="submit" class='btnUtil'>
+            <image src='{{item.image}}'></image>
+            <text>{{item.text}}</text>
+          </button>
+        </form>
+      </view>
+    </view>
+
+    <view class='cordBox' wx:if='{{cord!=null}}'>
+      <view class='cord_wrap {{item.image}}' bindtap='toolBarHander' wx:for='{{cord}}' data-key='{{item.key}}' wx:key='key'>
+        <text>{{item.text}}</text>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- <view class='footer'></view>
+  <swiper class='mySwiper'>
+    <swiper-item>
+      <image src='../../images/b2.jpg'></image>
+    </swiper-item>
+  </swiper> -->
+
 </view>

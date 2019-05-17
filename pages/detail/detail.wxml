@@ -18,6 +18,6 @@
     </view>
   </view>
 
-  <button type='primary' class='fillBtn' bindtap='startHander' disabled='{{startBtnState}}'>{{startBtnText}}</button>
+  <button type='primary' class='fillBtn' bindtap='{{startHanderView}}' disabled='{{startBtnState}}'>{{startBtnText}}</button>
   <button class='fillBtn' bindtap='callHander'>联系该用户</button>
 </view>

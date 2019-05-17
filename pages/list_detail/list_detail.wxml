@@ -1,0 +1,25 @@
+<view class='myContainer'>
+  <view class='textBox'>
+    <view class='textBox_warp'>
+      <view class='warp_head'>垃圾桶编号</view>
+      <view class='warp_body'>{{info.bh}}</view>
+    </view>
+    <view class='textBox_warp'>
+      <view class='warp_head'>地址</view>
+      <view class='warp_body'>{{info.parentName}}</view>
+    </view>
+
+    <view class='textBox_warp'>
+      <view class='warp_head'>垃圾桶类型</view>
+      <view class='warp_body'>{{info.lx}}</view>
+    </view>
+
+    <view class='textBox_warp_big'>
+      <view class='warp_head'>状态</view>
+      <view class='warp_body'>{{info.zt}}</view>
+    </view>
+  </view>
+
+  <button type='primary' class='fillBtn' bindtap='hwgBtnHander' hidden='{{!hwg}}'>{{btnText}}</button>
+  <button type='primary' class='fillBtn' bindtap='ydyBtnHander' hidden='{{!ydy}}'>{{btnText}}</button>
+</view>

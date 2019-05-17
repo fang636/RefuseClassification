@@ -1,9 +1,10 @@
 .myContainer {
+  border-top: 1rpx solid #e0e0e0;
   display: flex;
   flex-direction: column;
+  text-align: center;
   padding-top: 30rpx;
   margin: 0 20rpx;
-  font-size: 40rpx;
 }
 
 .textBox {
@@ -26,33 +27,16 @@
 .warp_head {
   font-size: 30rpx;
   width: 200rpx;
-  text-align: center;
 }
 
 .warp_body {
   flex: 1;
+  font-size: 36rpx;
   font-weight: 600rpx;
 }
 
-.fillBtn {
+
+.fillBtn{
   width: 90%;
-  margin-top: 45rpx;
-}
-
-.select {
-  height: 90rpx;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  line-height: 90rpx;
-  display: flex;
-  justify-content: space-between;
-  border-top: 1rpx solid #e0e0e0;
-  border-bottom: 1rpx solid #e0e0e0;
-  box-shadow: 0 0 5rpx #e0e0e0;
-  font-size: 30rpx;
-}
-
-picker {
-  width: 100%;
+  margin-top: 60rpx;
 }

@@ -37,12 +37,12 @@ Page({
         'content-type': 'application/x-www-form-urlencoded',
       },
       url: app.globalData.url + 'weixin/qrfd',
-      method: 'POST',
+      method: 'get',
       data: {
         state: state,
         bh: '233',
         openId: app.globalData.openId,
-        ljdbh:'aaaaaaaaa'
+        ljdbh: 'aaaaaaaaa'
       }
     })
   },

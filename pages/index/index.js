@@ -29,32 +29,17 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     //轮播图
     images: [{
-        url: '../../images/hb.jpg'
+        url: '../../images/5.png'
       },
       {
         url: '../../images/hb.jpg'
       }
     ],
     //工具栏
-    toolBar: [{
-        image: '../../images/scanCode.png',
-        text: '取袋',
-        key: 'QRcode'
-      },
-      {
-        image: '../../images/big.png',
-        text: '大件回收',
-        key: 'bigThing'
-      },
-      {
-        image: '../../images/record3.png',
-        text: '记录',
-        key: 'record'
-      }
-    ]
+    toolBar: [],
+    cord: null //卡片
   },
   onLoad: function(options) {
-    this.onShow()
     wx.hideLoading()
     if (app.globalData.userInfo) {
       this.setData({
@@ -82,15 +67,101 @@ Page({
         }
       })
     }
-    if (options.state == 'sandCode') {
+
+
+    var userModel = app.globalData.userModel
+    //console.log(userModel)
+
+    if (userModel.sf == 'ROLE_USER') {
+      console.log('普通用户登录===')
       this.setData({
-        test: 'asdsasa'
+        toolBar: [{
+            image: '../../images/scanCode.png',
+            text: '取袋',
+            key: 'QRcode'
+          },
+          {
+            image: '../../images/big.png',
+            text: '大件回收',
+            key: 'bigThing'
+          },
+          {
+            image: '../../images/scanCode.png',
+            text: '扫码测试',
+            key: 'testQRcode'
+          },
+          {
+            image: '../../images/record3.png',
+            text: '记录',
+            key: 'record'
+          }
+        ]
       })
-    } else {
-      this.setData({
-        test: '不是扫码'
-      })
+      return
     }
+
+    if (userModel.sf == 'ROLE_HWGR') {
+      console.log('环卫工人登录===')
+      this.setData({
+        toolBar: [{
+            image: '../../images/list.png',
+            text: '管理列表',
+            key: 'ydy_list'
+          },
+          {
+            image: '../../images/edit.png',
+            text: '违规反馈',
+            key: 'violation'
+          }
+        ]
+      })
+      return
+    }
+    if (userModel.sf == 'ROLE_USHER') {
+      console.log('引导员登录===')
+      this.setData({
+        toolBar: [{
+            image: '../../images/manger.png',
+            text: '大物件',
+            key: 'ydy_bigThingManger'
+          },
+          {
+            image: '../../images/list.png',
+            text: '管理列表',
+            key: 'ydy_list'
+          },
+          {
+            image: '../../images/report.png',
+            text: '上报',
+            key: 'ydy_report'
+          }
+        ],
+        cord: [{
+            key: 'ydy_deposit',
+            image: 'cord1',
+            text: '垃圾袋存放'
+          },
+          {
+            key: 'ydy_maintain',
+            image: 'cord2',
+            text: '设备维护'
+          }
+        ]
+      })
+      return
+    }
+    if (userModel.sf == 'ROLE_WBLJHSZ') {
+      console.log('回收站登录===')
+      this.setData({
+        toolBar: [{
+          image: '../../images/manger.png',
+          text: '大物件回收',
+          key: 'ydy_bigThingManger'
+        }]
+      })
+      return
+    }
+
   },
 
   /**
@@ -99,31 +170,7 @@ Page({
   toolBarHander: function(e) {
     switch (e.currentTarget.dataset.key) {
       case 'QRcode':
-        /* wx.scanCode({
-         success: (res) => {
-            console.log(res)
-            var obj = null
-            try {
-              var obj = JSON.parse('{'+res.result+'}')
-            } catch (e) {
-              console.log(e)
-            }
-            console.log(obj)
-            wx.showToast({
-              title: '成功',
-              icon: 'success',
-              duration: 2000
-            })
-          },
-          fail: (res) => {
-            wx.showToast({
-              title: '失败',
-              icon: 'none',
-              duration: 2000
-            })
-          },
-          complete: (res) => {}
-        }) */
+
         wx.navigateTo({
           url: '../QRcode/QRcode?state=aaa'
         })
@@ -138,7 +185,7 @@ Page({
           url: '../info/info'
         })
         break
-      case 'bigThingManger':
+      case 'ydy_bigThingManger':
         wx.switchTab({
           url: '../info/info'
         })
@@ -148,40 +195,72 @@ Page({
           url: '../violation/violation'
         })
         break
+      case 'ydy_list':
+        wx.navigateTo({
+          url: '../ydy_list/ydy_list'
+        })
+        break
+      case 'ydy_report':
+        wx.navigateTo({
+          url: '../ydy_report/ydy_report'
+        })
+        break
+      case 'ydy_maintain':
+        wx.navigateTo({
+          url: '../ydy_list/ydy_list'
+        })
+        break
+      case 'testQRcode':
+        wx.scanCode({
+          success: (res) => {
+            console.log(res)
+            wx.request({
+              header: {
+                'content-type': 'application/x-www-form-urlencoded',
+              },
+              url: app.globalData.url + 'weixin/qrfd',
+              method: 'POST',
+              data: {
+                state: 'aaa',
+                bh: '233',
+                openId: app.globalData.openId,
+                ljdbh: res.result
+              }
+            })
+            wx.showToast({
+              title: '成功',
+              icon: 'success',
+              duration: 2000
+            })
+          },
+          fail: (res) => {
+            wx.showToast({
+              title: '失败',
+              icon: 'none',
+              duration: 2000
+            })
+          },
+          complete: (res) => {}
+        })
+        break
+
     }
   },
   //环卫工人登录时切换工具栏
   onShow: function() {
-    var userModel = app.globalData.userModel
-    //console.log(userModel)
-    if (userModel.sf == 'ROLE_HWGR') {
-      console.log('环卫工人登录===')
-      this.setData({
-        toolBar: [{
-            image: '../../images/manger.png',
-            text: '大物件',
-            key: 'bigThingManger'
-          },
-          {
-            image: '../../images/edit.png',
-            text: '违规反馈',
-            key: 'violation'
-          }
-        ]
-      })
-    }
+
 
   },
   getFormId: function(res) {
     var formId = res.detail.formId
-    // if (formId == 'the formId is a mock one') {
-    //   console.log(`模拟器中运行！`)
-    //   return false;
-    // }
-    // if (formId.length == 0) {
-    //   console.log(`formId不能为空`)
-    //   return false;
-    // }
+    if (formId == 'the formId is a mock one') {
+      console.log('模拟器中运行！')
+      return false
+    }
+    if (formId.length == 0) {
+      console.log(`formId不能为空`)
+      return false
+    }
     var url = app.globalData.url + 'weixin/saveFormId'
     var data = {
       openId: app.globalData.openId,

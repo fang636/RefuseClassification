@@ -4,11 +4,6 @@
 App({
   onLaunch: function() {
     var self = this;
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
 
     // 登录
     wx.login({
@@ -59,10 +54,7 @@ App({
                 } else {
                   console.log('没有授权')
                   wx.redirectTo({
-                    url: '../getUserinfo/getUserinfo',
-                    success: function() {
-                      console.log('执行了跳转???')
-                    }
+                    url: '../getUserinfo/getUserinfo'
                   })
                 }
               }
@@ -73,7 +65,7 @@ App({
     })
   },
   globalData: {
-    //url: 'http://192.168.52.83/gsm/', //服务器地址
+    //url: 'http://172.16.161.116/gsm/', //服务器地址
     //url: 'http://localhost/gsm/', //服务器地址
     url: 'https://baiyao.51baiyao.com/gsm/',
     userInfo: null, //微信用户基本数据
@@ -101,52 +93,68 @@ App({
       dataType: 'json',
 
       success: function(result) {
-        console.log(result)
-        if (!result.data) { //没有账号信息--执行注册
-          console.log('没有账号信息--执行注册')
-          wx.request({
-            header: {
-              'content-type': 'application/x-www-form-urlencoded',
-            },
-            method: 'POST',
-            url: _this.globalData.url + 'weixin/zhuce',
-            data: {
-              openId: _this.globalData.openId,
-              nickName: _this.globalData.userInfo.nickName
-            },
-            success: function(result) {
-              if (result.statusCode == 200) {
-                console.log('注册成功')
-              } else {
-                wx.showModal({
-                  title: '网络错误',
-                  content: '请尝试重新连接',
-                  showCancel: false,
-                  confirmText: '重试',
-                  success: function(res) {
-                    if (res.confirm) {
-                      _this.judgeUser()
+        //console.log(result)
+        if (result.statusCode == 200) {
+          if (result.data == null || result.data == '' || result.data == false) { //没有账号信息--执行注册
+            console.log('没有账号信息--执行注册')
+            wx.request({
+              header: {
+                'content-type': 'application/x-www-form-urlencoded',
+              },
+              method: 'POST',
+              url: _this.globalData.url + 'weixin/zhuce',
+              data: {
+                openId: _this.globalData.openId,
+                nickName: _this.globalData.userInfo.nickName
+              },
+              success: function(result) {
+                if (result.statusCode == 200) {
+                  console.log('注册成功')
+                  _this.judgeUser()
+                } else {
+                  wx.showModal({
+                    title: '网络错误',
+                    content: '请尝试重新连接',
+                    showCancel: false,
+                    confirmText: '重试',
+                    success: function(res) {
+                      if (res.confirm) {
+                        _this.judgeUser()
+                      }
                     }
-                  }
-                })
+                  })
+                }
+              }
+            })
+
+          }
+          //判断是否绑定手机
+          _this.globalData.userModel = result.data
+          // console.log(result.data)
+          if (result.data.phone == null) { //跳转到绑定手机
+            wx.redirectTo({
+              url: '../register/register'
+            })
+          } else {
+            console.log('已存在完整账号信息---')
+            wx.switchTab({
+              url: '../index/index'
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '连接错误',
+            content: '请尝试重新连接',
+            showCancel: false,
+            confirmText: '重试',
+            success: function(res) {
+              if (res.confirm) {
+                _this.judgeUser()
               }
             }
           })
+        }
 
-        }
-        //判断是否绑定手机
-        _this.globalData.userModel = result.data
-        // console.log(result.data)
-        if (result.data.phone == null) { //跳转到绑定手机
-          wx.redirectTo({
-            url: '../register/register'
-          })
-        } else {
-          console.log('已存在完整账号信息---')
-          wx.switchTab({
-            url: '../index/index'
-          })
-        }
       },
       fail: function(result) {
         console.log('judgePhone方法发送请求失败！')
@@ -179,6 +187,21 @@ App({
       data: data,
       type: type,
       success: success
+    })
+  },
+  myRequest2: function(url, data, type, success, fail) {
+    if (type == '' || type == null) {
+      type = 'JSON'
+    }
+    wx.request({
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+      url: url,
+      data: data,
+      type: type,
+      success: success,
+      fail: fail
     })
   }
 })

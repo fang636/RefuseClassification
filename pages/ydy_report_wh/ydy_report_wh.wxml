@@ -1,0 +1,22 @@
+<view class='myContainer'>
+  <view class='formbox'>
+
+    <view class='row_area_wrap'>
+      <picker bindchange="selectChangeHander" range="{{select}}">
+        <view class='select' bindtap=''>
+          {{selectText==null?'选择类型':selectText}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='row_area_wrap'>
+      <view class='row_area_head'>操作说明</view>
+      <view class='row_area_body'>
+        <textarea type='text' placeholder='说明' bindinput='explainChangeHander'></textarea>
+      </view>
+    </view>
+
+    <button type='primary' bindtap='submitHander' class='btn'>提交</button>
+
+  </view>
+</view>

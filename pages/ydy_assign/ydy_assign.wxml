@@ -1,0 +1,30 @@
+<view class='myContainer'>
+  <view class='formbox'>
+
+    <view class='row_area_wrap'>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" range="{{multiArray}}">
+        <view class='select' bindtap='stratSelect'>
+          {{selectText}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='row_area_wrap'>
+      <picker bindcolumnchange="" range="{{recycle}}" bindchange='recyclePickerChange'>
+        <view class='select' bindtap='clickRecycleHander'>
+          {{recycleSelectText}}
+        </view>
+      </picker>
+    </view>
+
+    <view class='row_area_wrap'>
+      <view class='row_area_head'>备注</view>
+      <view class='row_area_body'>
+        <textarea type='text' placeholder='填写备注(可选)' bindinput='remarksChangeHander'></textarea>
+      </view>
+    </view>
+
+    <button type='primary' bindtap='submitHander' class='btn'>提交</button>
+
+  </view>
+</view>

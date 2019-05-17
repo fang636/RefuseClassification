@@ -6,9 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: null,
     info: {},
     startBtnState: false,
-    startBtnText: '开始处理'
+    startBtnText: '指派人员处理',
+    startHanderView: '' //处理方法(方法名)
   },
   /**
    * 联系用户(打电话)
@@ -19,87 +21,206 @@ Page({
     })
   },
   /**
-   * 处理大物件事件
+   * 引导员处理大物件
    */
-  startHander: function(e) {
-    const _this = this
-    var title = '提示'
-    var content = '是否接受申请？'
-    var url = app.globalData.url + 'weixin/hwcldwj'
-    var data = {
-      id: this.data.info.id,
-      hwopenId: app.globalData.openId
-    }
+  ydy_startHander: function(e) {
+    var id = this.data.info.id
+    wx.navigateTo({
+      url: '../ydy_assign/ydy_assign?id=' + id
+    })
 
-    //以上为开始处理的参数
-    if (_this.data.info.hw != null) {
-      if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
-        content = '是否完成服务？'
-        url = app.globalData.url + 'weixin/wccldwj',
-          data = {
-            id: this.data.info.id,
-          }
-      }
-    }
-
+  },
+  /**
+   * 回收站开始处理大物件
+   */
+  hsz_startHander: function(e) {
+    const self = this
+    var id = this.data.info.id
     wx.showModal({
-      title: '提示',
-      content: content,
-      success: function(result) {
-        if (result.confirm) {
-          app.myRequest(url, data, null, function(result) {
-            if (result) {
-              wx.switchTab({
-                url: '../info/info'
-              })
-              wx.showToast({
-                title: '操作完成',
-                image: '../../images/okay.png',
-                duration: 2000
+      title: '操作提示',
+      content: '是否开始处理该大物件？',
+      success: function(res) {
+        if (res.confirm) {
+          qpp.myRequest2(app.globalData.url + 'weixin/seekdwj', {
+            id: id
+          }, null, function(result) {
+            if (result.statusCode == 200) {
+              if (result) {
+                wx.switchTab({
+                  url: '../info/info'
+                })
+                wx.showToast({
+                  title: '完成',
+                  duration: 2000
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '操作失败，请刷新后重试',
+                  showCancel: false
+                })
+              }
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '连接失败，请刷新后重试',
+                showCancel: false
               })
             }
+
+          }, function(result) {
+            wx.showModal({
+              title: '提示',
+              content: '连接失败，请检查网络后重试',
+              showCancel: false
+            })
           })
         }
       }
     })
+  },
+  /**
+   * 回收站确认完成大物件
+   */
+  hsz_completeHander: function(e) {
+    const self = this
+    var id = this.data.info.id
+    wx.showModal({
+      title: '操作提示',
+      content: '是否确认已完成？',
+      success: function(res) {
+        if (res.confirm) {
+          qpp.myRequest2(app.globalData.url + 'weixin/confirmdwj', {
+            id: id
+          }, null, function(result) {
+            if (result.statusCode == 200) {
+              if (result) {
+                wx.switchTab({
+                  url: '../info/info'
+                })
+                wx.showToast({
+                  title: '完成',
+                  duration: 2000
+                })
 
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: '操作失败，请刷新后重试',
+                  showCancel: false
+                })
+              }
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '连接失败，请刷新后重试',
+                showCancel: false
+              })
+            }
+
+          }, function(result) {
+            wx.showModal({
+              title: '提示',
+              content: '连接失败，请检查网络后重试',
+              showCancel: false
+            })
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.data.id = options.id
     const _this = this
-    app.myRequest(app.globalData.url + 'weixin/czdjljid', {
-      id: options.id
-    }, null, function(result) {
-      //console.log(result.data)
-      var res_info
-      if (result.statusCode == 200) {
-        res_info = result.data
-      } else {
-        res_info = {}
-      }
-      _this.setData({
-        info: res_info
-      })
-      console.log(_this.data.info)
-      if (_this.data.info.status == '处理中') {
-        var startBtnText = '已由' + _this.data.info.hw.nickName + '处理中';
-        var startBtnState = true
-        if (_this.data.info.hw.openId == app.globalData.openId) { //确认是否为本人操作中
-          startBtnText = '完成服务'
-          startBtnState = false
+
+    var user = app.globalData.userModel
+    var success = null
+    if (user.sf == 'ROLE_USHER') {
+      success = function(result) {
+        //console.log(result.data)
+        var res_info
+        if (result.statusCode == 200) {
+          res_info = result.data
+        } else {
+          res_info = {}
         }
         _this.setData({
-          startBtnState: startBtnState,
-          startBtnText: startBtnText
+          info: res_info,
+          startHanderView: 'ydy_startHander'
         })
-      } else if (_this.data.info.status == '已完成') {
-        _this.setData({
-          startBtnState: true,
-          startBtnText: '已完成'
-        })
+        //console.log(_this.data.info)
+        if (_this.data.info.status == '已审核') {
+          var startBtnText = '已指派' + _this.data.info.wbljhsz.name + '处理中';
+          var startBtnState = true
+
+          _this.setData({
+            startBtnState: startBtnState,
+            startBtnText: startBtnText
+          })
+        } else if (_this.data.info.status == '已完成') {
+          _this.setData({
+            startBtnState: true,
+            startBtnText: '已完成'
+          })
+        }
       }
+    }
+
+
+    if (user.sf == 'ROLE_WBLJHSZ') {
+      success = function(result) {
+        var res_info
+        if (result.statusCode == 200) {
+          res_info = result.data
+        } else {
+          res_info = {}
+        }
+        _this.setData({
+          info: res_info
+        })
+        //console.log(_this.data.info)
+        if (_this.data.info.status == '已审核') {
+          _this.setData({
+            startBtnText: '开始处理',
+            startHanderView: 'hsz_startHander'
+          })
+        } else if (_this.data.info.status == '已出发') {
+          _this.setData({
+            startBtnText: '处理完成',
+            startHanderView: 'hsz_completeHander'
+          })
+        } else if (_this.data.info.status == '已完成') {
+          _this.setData({
+            startBtnState: true,
+            startBtnText: '已完成'
+          })
+        }
+      }
+    }
+
+
+
+    app.myRequest2(app.globalData.url + 'weixin/czdjljid', {
+      id: _this.data.id
+    }, null, success, function(result) {
+      wx.showModal({
+        title: '提示',
+        content: '连接失败，请检查网络后重试',
+        confirmText: '重新连接',
+        success: function(res) {
+          if (res.confirm) {
+            _this.onLoad()
+          }
+          if (res.cancel) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
     })
 
   },

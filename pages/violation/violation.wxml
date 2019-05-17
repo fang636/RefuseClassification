@@ -1,19 +1,29 @@
 <view class='myContainer'>
 
   <view class='textBox'>
+
+    <view class='textBox_warp'>
+      <picker bindcolumnchange="" range="{{hwg}}" bindchange='hwgPickerChange' bindcolumnchange='pickerColumnChange'>
+        <view class='select' bindtap='clickHwgHander'>
+          <view class='warp_head'>
+            选择类型
+          </view>
+        </view>
+
+      </picker>
+    </view>
+
     <view class='textBox_warp'>
       <view class='warp_head'>编号</view>
       <input class='warp_body' disabled='false'></input>
     </view>
+
+    <view class='textBox_warp'>
+      <view class='warp_head'>说明</view>
+      <input class='warp_body'></input>
+    </view>
   </view>
-  <picker mode='selector' range='{{array}}' value="0" class='picker'>
-    <view class="picker_head">
-      选择类型
-    </view>
-    <view class='picker_body'>
-      {{array[0]}}
-    </view>
-  </picker>
+
   <button type='primary' class='fillBtn' bindtap='QRcodeHander'>扫码获取编号</button>
   <button class='fillBtn' bindtap='submitHander'>点击反馈</button>
 
