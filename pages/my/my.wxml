@@ -4,7 +4,17 @@
     <view class='userinfo'>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <text>{{test}}</text>
+      <text class='myText'>{{basicInfo}}</text>
+    </view>
+  </view>
+
+  <view class='optionBox'>
+    <view class='item' bindtap='clickBasicHander'>
+      <view class='item_content'>基本信息</view>
+    </view>
+
+    <view class='item' bindtap=''>
+      <view class='item_content'>关于</view>
     </view>
   </view>
 </view>

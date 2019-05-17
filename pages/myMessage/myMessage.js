@@ -1,38 +1,33 @@
-// pages/my/my.js
+// pages/myMessage/myMessage.js
 const app = getApp()
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    basicInfo: ''
+    userModel: null,
+    userType: ''
   },
-  clickBasicHander: function(e) {
-    wx.navigateTo({
-      url: '../myMessage/myMessage'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //var basicInfo = ''
+    var userType = ''
     var user = app.globalData.userModel
-    // if (user.sf == 'ROLE_USER') {
-    //   basicInfo = user.parentName
-    // }
-    // if (user.sf == 'ROLE_USHER') {
-    //   basicInfo = user.parentName + '-引导员'
-    // }
-    // if (user.sf == 'ROLE_WBLJHSZ') {
-    //   basicInfo = user.parentName + '-回收站'
-    // }
+    if (user.sf == 'ROLE_USER') {
+      userType = '普通用户'
+    }
+    if (user.sf == 'ROLE_USHER') {
+      userType = '引导员'
+    }
+    if (user.sf == 'ROLE_WBLJHSZ') {
+      userType = '回收站'
+    }
     this.setData({
-      userInfo: app.globalData.userInfo,
-      basicInfo: user.parentName
+      userModel: user,
+      userType: userType
     })
   },
 

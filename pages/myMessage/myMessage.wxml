@@ -1,0 +1,23 @@
+<view class='myContainer'>
+
+  <view class='optionBox'>
+
+    <view class='item' bindtap=''>
+      <view class='item_head'>电话</view>
+      <view class='item_content'>{{userModel.phone+'  >'}}</view>
+    </view>
+
+    <view class='item' bindtap=''>
+      <view class='item_head'>地址</view>
+      <view class='item_content'>{{userModel.parentName}}</view>
+    </view>
+
+  </view>
+
+  <view class='optionBox'>
+    <view class='item' bindtap=''>
+      <view class='item_head'>用户类型</view>
+      <view class='item_content'>{{userType}}</view>
+    </view>
+  </view>
+</view>

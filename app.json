@@ -14,7 +14,8 @@
     "pages/ydy_report/ydy_report",
     "pages/list_detail/list_detail",
     "pages/ydy_report_wh/ydy_report_wh",
-    "pages/ydy_assign/ydy_assign"
+    "pages/ydy_assign/ydy_assign",
+    "pages/myMessage/myMessage"
   ],
   "window": {
     "backgroundTextStyle": "light",
