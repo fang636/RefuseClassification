@@ -93,7 +93,7 @@ App({
       dataType: 'json',
 
       success: function(result) {
-        console.log(result)
+        //console.log(result)
         if (result.statusCode == 200) {
           if (result.data == null || result.data == '' || result.data == false) { //没有账号信息--执行注册
             console.log('没有账号信息--执行注册')
@@ -110,6 +110,7 @@ App({
               success: function(result) {
                 if (result.statusCode == 200) {
                   console.log('注册成功')
+                  _this.judgeUser()
                 } else {
                   wx.showModal({
                     title: '网络错误',

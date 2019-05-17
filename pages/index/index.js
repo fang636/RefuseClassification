@@ -138,12 +138,12 @@ Page({
         ],
         cord: [{
             key: 'ydy_deposit',
-            image: '../../images/cord1.jpg',
+            image: 'cord1',
             text: '垃圾袋存放'
           },
           {
             key: 'ydy_maintain',
-            image: '../../images/cord1.jpg',
+            image: 'cord2',
             text: '设备维护'
           }
         ]
@@ -253,14 +253,14 @@ Page({
   },
   getFormId: function(res) {
     var formId = res.detail.formId
-    // if (formId == 'the formId is a mock one') {
-    //   console.log(`模拟器中运行！`)
-    //   return false;
-    // }
-    // if (formId.length == 0) {
-    //   console.log(`formId不能为空`)
-    //   return false;
-    // }
+    if (formId == 'the formId is a mock one') {
+      console.log('模拟器中运行！')
+      return false
+    }
+    if (formId.length == 0) {
+      console.log(`formId不能为空`)
+      return false
+    }
     var url = app.globalData.url + 'weixin/saveFormId'
     var data = {
       openId: app.globalData.openId,
